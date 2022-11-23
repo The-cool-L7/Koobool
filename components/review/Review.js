@@ -4,8 +4,9 @@ import { Image, StyleSheet, View, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 
-import ReviewButton from './ReviewButton';
 import BookInfo from './BookInfo';
+import ReviewButton from './ReviewButton';
+import DrawingCanvas from './DrawingCanvas';
 
 const styles = StyleSheet.create({
 	container: {
@@ -57,6 +58,7 @@ const Review = () => {
 			<View style={styles.container}>
 				{/* <Image style={styles.image} source={{ uri: image }} /> */}
 				<BookInfo text='What did you think of Matilda?' />
+				<DrawingCanvas />
 				<View style={styles.buttons}>
 					<ReviewButton
 						onPress={onGalleryButtonPress}
