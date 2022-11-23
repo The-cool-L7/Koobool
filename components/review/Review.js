@@ -5,11 +5,14 @@ import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 
 import ReviewButton from './ReviewButton';
+import BookInfo from './BookInfo';
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: 'column',
+		paddingLeft: 20,
+		paddingRight: 20,
 	},
 	image: {
 		width: 350,
@@ -52,7 +55,8 @@ const Review = () => {
 	return (
 		<>
 			<View style={styles.container}>
-				<Image style={styles.image} source={{ uri: image }} />
+				{/* <Image style={styles.image} source={{ uri: image }} /> */}
+				<BookInfo text='What did you think of Matilda?' />
 				<View style={styles.buttons}>
 					<ReviewButton
 						onPress={onGalleryButtonPress}

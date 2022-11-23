@@ -20,16 +20,18 @@ const styles = StyleSheet.create({
 
 export default function App() {
 	return (
-		<SafeAreaView style={styles.container}>
+		<>
 			<StatusBar backgroundColor='fff' style='dark' />
-			<ImageBackground
-				source={require('./assets/navbar/review-bkg-image-white.png')}
-				resizeMode='cover'
-				style={styles.imageBackground}
-			>
-				<Navbar />
-				<Review />
-			</ImageBackground>
-		</SafeAreaView>
+			<SafeAreaView style={styles.container}>
+				<ImageBackground
+					source={require('./assets/review-page/review-bkg-image-white.png')}
+					resizeMode='cover'
+					style={styles.imageBackground}
+				>
+					<Navbar />
+					<Review />
+				</ImageBackground>
+			</SafeAreaView>
+		</>
 	);
 }
