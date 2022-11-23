@@ -2,25 +2,26 @@ import { useState } from 'react';
 
 import { Image, StyleSheet, View, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
-import { Camera, CameraType, requestPermissionsAsync } from 'expo-camera';
+import { Camera } from 'expo-camera';
 
 import ReviewButton from './ReviewButton';
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: 'column',
+	},
 	image: {
 		width: 350,
 		height: 350,
 		backgroundColor: 'darkgray',
 		borderRadius: 40,
 	},
-	buttons: { flexDirection: 'row' },
+	buttons: { flexDirection: 'row', justifyContent: 'center' },
 });
 
 const Review = () => {
 	const [image, setImage] = useState(null);
-
-	// const [status, requestPermission] = Camera.useCameraPermissions();
 
 	const onGalleryButtonPress = async () => {
 		const result = await ImagePicker.launchImageLibraryAsync({
@@ -50,10 +51,18 @@ const Review = () => {
 
 	return (
 		<>
-			<Image style={styles.image} source={{ uri: image }} />
-			<View style={styles.buttons}>
-				<ReviewButton onPress={onGalleryButtonPress} buttonText='Gallery' />
-				<ReviewButton onPress={onCameraButtonPress} buttonText='Camera' />
+			<View style={styles.container}>
+				<Image style={styles.image} source={{ uri: image }} />
+				<View style={styles.buttons}>
+					<ReviewButton
+						onPress={onGalleryButtonPress}
+						buttonText='Gallery'
+					/>
+					<ReviewButton
+						onPress={onCameraButtonPress}
+						buttonText='Camera'
+					/>
+				</View>
 			</View>
 		</>
 	);
