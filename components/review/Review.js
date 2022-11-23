@@ -34,7 +34,7 @@ const Review = () => {
 	const onCameraButtonPress = async () => {
 		const { status } = await Camera.requestCameraPermissionsAsync();
 
-		if (status !== 'granted') {
+		if (status === 'granted') {
 			const result = await ImagePicker.launchCameraAsync({
 				allowsEditing: false,
 			});
