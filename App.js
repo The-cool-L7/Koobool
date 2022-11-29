@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, ImageBackground, View } from 'react-native';
+import {
+	StyleSheet,
+	SafeAreaView,
+	ImageBackground,
+	ScrollView,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import Navbar from './components/navbar/Navbar';
@@ -16,6 +21,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
+	scrollView: {},
 });
 
 export default function App() {
@@ -23,14 +29,16 @@ export default function App() {
 		<>
 			<StatusBar backgroundColor='fff' style='dark' />
 			<SafeAreaView style={styles.container}>
-				<ImageBackground
-					source={require('./assets/review-page/review-bkg-image-white.png')}
-					resizeMode='cover'
-					style={styles.imageBackground}
-				>
-					<Navbar />
-					<Review />
-				</ImageBackground>
+				<ScrollView style={styles.scrollView}>
+					<ImageBackground
+						source={require('./assets/review-page/review-bkg-image-white.png')}
+						resizeMode='cover'
+						style={styles.imageBackground}
+					>
+						<Navbar />
+						<Review />
+					</ImageBackground>
+				</ScrollView>
 			</SafeAreaView>
 		</>
 	);

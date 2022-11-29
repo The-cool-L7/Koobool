@@ -1,9 +1,10 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
 
+import { Gap } from '../utilities/utils';
+
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
 	},
 	bookImageView: {
 		maxWidth: '50%',
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
 		height: 200,
 	},
 	bookText: {
-		fontSize: 20,
+		fontSize: 25,
 		maxWidth: '50%',
 		// fontFamily: 'Robot',
 		fontWeight: 'bold',
@@ -32,6 +33,7 @@ const BookInfo = (props) => {
 						style={styles.bookImage}
 					/>
 				</View>
+				<Gap size={20} />
 				<Text style={styles.bookText}>{text}</Text>
 			</View>
 		</>

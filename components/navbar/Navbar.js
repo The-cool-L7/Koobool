@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
 		width: '100%',
 		paddingLeft: 20,
 		paddingRight: 20,
-		marginBottom: 40,
+		marginBottom: 20,
 	},
 	userImage: {
 		width: 45,

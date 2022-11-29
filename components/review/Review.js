@@ -1,27 +1,30 @@
 import { useState } from 'react';
 
-import { Image, StyleSheet, View, Alert } from 'react-native';
+import { Image, StyleSheet, View, Alert, Text } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
-import DrawingCanvas from './DrawingCanvas';
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		flexDirection: 'column',
-		paddingLeft: 20,
-		paddingRight: 20,
+		paddingHorizontal: 40,
 	},
 	image: {
-		width: 350,
-		height: 350,
+		width: 300,
+		height: 300,
 		backgroundColor: 'darkgray',
-		borderRadius: 40,
+		borderRadius: 10,
+		marginTop: 20,
 	},
 	buttons: { flexDirection: 'row', justifyContent: 'center' },
+	bookName: {
+		fontSize: 28,
+		fontWeight: 'bold',
+		marginBottom: 5,
+	},
 });
 
 const Review = () => {
@@ -56,17 +59,17 @@ const Review = () => {
 	return (
 		<>
 			<View style={styles.container}>
+				<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
 				<BookInfo text='What did you think of Matilda?' />
-				{/* <DrawingCanvas /> */}
 				<Image style={styles.image} source={{ uri: image }} />
 				<View style={styles.buttons}>
 					<ReviewButton
-						onPress={onGalleryButtonPress}
-						buttonText='Gallery'
-					/>
-					<ReviewButton
 						onPress={onCameraButtonPress}
 						buttonText='Camera'
+					/>
+					<ReviewButton
+						onPress={onGalleryButtonPress}
+						buttonText='Gallery'
 					/>
 				</View>
 			</View>
