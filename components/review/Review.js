@@ -56,9 +56,9 @@ const Review = () => {
 	return (
 		<>
 			<View style={styles.container}>
-				{/* <Image style={styles.image} source={{ uri: image }} /> */}
 				<BookInfo text='What did you think of Matilda?' />
-				<DrawingCanvas />
+				{/* <DrawingCanvas /> */}
+				<Image style={styles.image} source={{ uri: image }} />
 				<View style={styles.buttons}>
 					<ReviewButton
 						onPress={onGalleryButtonPress}
