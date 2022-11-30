@@ -12,9 +12,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 40,
 	},
-	image: {
-		width: 300,
-		height: 300,
+	previewImage: {
+		width: 'auto',
+		height: 250,
 		backgroundColor: 'darkgray',
 		borderRadius: 10,
 		marginTop: 20,
@@ -61,7 +61,7 @@ const Review = () => {
 			<View style={styles.container}>
 				<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
 				<BookInfo text='What did you think of Matilda?' />
-				<Image style={styles.image} source={{ uri: image }} />
+				<Image style={styles.previewImage} source={{ uri: image }} />
 				<View style={styles.buttons}>
 					<ReviewButton
 						onPress={onCameraButtonPress}
