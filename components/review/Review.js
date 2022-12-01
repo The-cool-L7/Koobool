@@ -1,9 +1,17 @@
 import { useState } from 'react';
 
-import { Image, StyleSheet, View, Alert, Text, Button } from 'react-native';
+import {
+	Image,
+	StyleSheet,
+	View,
+	Alert,
+	Text,
+	TouchableOpacity,
+	ToastAndroid,
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
-// import toast from 'react-hot-toast';
+import Toast from 'react-native-toast-message';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
@@ -29,7 +37,17 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 	},
-	submitButton: {},
+	submitButton: {
+		backgroundColor: '#1e1e1e',
+		paddingHorizontal: 20,
+		paddingVertical: 15,
+		alignItems: 'center',
+		borderRadius: 10,
+	},
+	submitButtonText: {
+		color: '#fff',
+		textAlign: 'center',
+	},
 });
 
 const Review = () => {
@@ -61,8 +79,19 @@ const Review = () => {
 		}
 	};
 
+	const onSubmitButtonPress = () => {
+		// Alert.alert('Submitted successfully!');
+		// Toast.show({
+		// 	type: 'success',
+		// 	text1: 'Hello',
+		// 	text2: 'This is some something 👋',
+		// });
+		// ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+	};
+
 	return (
 		<>
+			<Toast />
 			<View style={styles.container}>
 				<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
 				<BookInfo text='What did you think of Matilda?' />
@@ -77,7 +106,14 @@ const Review = () => {
 						buttonText='Gallery'
 					/>
 				</View>
-				<Button style={styles.submitButton} title='Submit Review' />
+
+				<TouchableOpacity
+					activeOpacity={0.8}
+					style={styles.submitButton}
+					onPress={onSubmitButtonPress}
+				>
+					<Text style={styles.submitButtonText}>Submit</Text>
+				</TouchableOpacity>
 			</View>
 		</>
 	);
