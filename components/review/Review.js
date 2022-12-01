@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-import { Image, StyleSheet, View, Alert, Text } from 'react-native';
+import { Image, StyleSheet, View, Alert, Text, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
+// import toast from 'react-hot-toast';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
@@ -12,6 +13,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 40,
 	},
+	bookName: {
+		fontSize: 28,
+		fontWeight: 'bold',
+		marginBottom: 5,
+	},
 	previewImage: {
 		width: 'auto',
 		height: 250,
@@ -19,12 +25,11 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		marginTop: 20,
 	},
-	buttons: { flexDirection: 'row', justifyContent: 'center' },
-	bookName: {
-		fontSize: 28,
-		fontWeight: 'bold',
-		marginBottom: 5,
+	buttons: {
+		flexDirection: 'row',
+		justifyContent: 'center',
 	},
+	submitButton: {},
 });
 
 const Review = () => {
@@ -72,6 +77,7 @@ const Review = () => {
 						buttonText='Gallery'
 					/>
 				</View>
+				<Button style={styles.submitButton} title='Submit Review' />
 			</View>
 		</>
 	);

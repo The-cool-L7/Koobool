@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
+// import { Toasts } from '@backpackapp-io/react-native-toast';
+
 import Navbar from './components/navbar/Navbar';
 import Review from './components/review/Review';
 
@@ -29,6 +31,7 @@ export default function App() {
 		<>
 			<StatusBar backgroundColor='fff' style='dark' />
 			<SafeAreaView style={styles.container}>
+				{/* <Toasts /> */}
 				<ScrollView style={styles.scrollView}>
 					<ImageBackground
 						source={require('./assets/review-page/review-bkg-image-white.png')}
