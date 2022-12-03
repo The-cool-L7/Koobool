@@ -7,14 +7,13 @@ import {
 	Alert,
 	Text,
 	TouchableOpacity,
-	ToastAndroid,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
-import Toast from 'react-native-toast-message';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
+import { Gap } from '../utilities/utils';
 
 const styles = StyleSheet.create({
 	container: {
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
 	buttons: {
 		flexDirection: 'row',
 		justifyContent: 'center',
+		marginVertical: 20,
 	},
 	submitButton: {
 		backgroundColor: '#1e1e1e',
@@ -80,27 +80,22 @@ const Review = () => {
 	};
 
 	const onSubmitButtonPress = () => {
-		// Alert.alert('Submitted successfully!');
-		// Toast.show({
-		// 	type: 'success',
-		// 	text1: 'Hello',
-		// 	text2: 'This is some something 👋',
-		// });
-		// ToastAndroid.show('A pikachu appeared nearby !', ToastAndroid.SHORT);
+		Alert.alert('Submitted successfully!');
 	};
 
 	return (
 		<>
-			<Toast />
 			<View style={styles.container}>
 				<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
 				<BookInfo text='What did you think of Matilda?' />
 				<Image style={styles.previewImage} source={{ uri: image }} />
+
 				<View style={styles.buttons}>
 					<ReviewButton
 						onPress={onCameraButtonPress}
 						buttonText='Camera'
 					/>
+					<Gap size={70} />
 					<ReviewButton
 						onPress={onGalleryButtonPress}
 						buttonText='Gallery'

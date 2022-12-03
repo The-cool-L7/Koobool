@@ -9,8 +9,6 @@ import {
 
 const styles = StyleSheet.create({
 	button: {
-		padding: 12,
-		margin: 20,
 		alignItems: 'center',
 	},
 	text: {
