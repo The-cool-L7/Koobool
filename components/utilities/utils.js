@@ -1,10 +1,4 @@
-import {
-	View,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	StatusBar,
-} from 'react-native';
+import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 
 export const Gap = ({ size, direction = 'horizontal' }) => {
 	return (
@@ -23,17 +17,11 @@ export const Layout = ({ children }) => {
 			// paddingVertical: 10,
 			flexGrow: 1,
 		},
-
-		scrollView: { flex: 1, flexGrow: 1 },
 	});
 
 	return (
 		<>
-			<SafeAreaView style={styles.container}>
-				{/* <ScrollView style={styles.scrollView}> */}
-				{children}
-				{/* </ScrollView> */}
-			</SafeAreaView>
+			<SafeAreaView style={styles.container}>{children}</SafeAreaView>
 		</>
 	);
 };

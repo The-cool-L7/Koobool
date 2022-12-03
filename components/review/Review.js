@@ -8,6 +8,7 @@ import {
 	Text,
 	TouchableOpacity,
 	ImageBackground,
+	ScrollView,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
@@ -21,10 +22,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
+		overflow: 'scroll',
 	},
 	container: {
 		flex: 1,
 		paddingHorizontal: 40,
+		overflow: 'scroll',
 	},
 	bookName: {
 		fontSize: 28,
@@ -91,37 +94,39 @@ const Review = () => {
 
 	return (
 		<>
-			<ImageBackground
-				source={require('../../assets/review-page/review-bkg-image-white.png')}
-				resizeMode='cover'
-				style={styles.imageBackground}
-			>
-				<View style={styles.container}>
-					<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
-					<BookInfo text='What did you think of Matilda?' />
-					<Image style={styles.previewImage} source={{ uri: image }} />
+			<ScrollView>
+				<ImageBackground
+					source={require('../../assets/review-page/review-bkg-image-white.png')}
+					resizeMode='cover'
+					style={styles.imageBackground}
+				>
+					<View style={styles.container}>
+						<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
+						<BookInfo text='What did you think of Matilda?' />
+						<Image style={styles.previewImage} source={{ uri: image }} />
 
-					<View style={styles.buttons}>
-						<ReviewButton
-							onPress={onCameraButtonPress}
-							buttonText='Camera'
-						/>
-						<Gap size={70} />
-						<ReviewButton
-							onPress={onGalleryButtonPress}
-							buttonText='Gallery'
-						/>
+						<View style={styles.buttons}>
+							<ReviewButton
+								onPress={onCameraButtonPress}
+								buttonText='Camera'
+							/>
+							<Gap size={70} />
+							<ReviewButton
+								onPress={onGalleryButtonPress}
+								buttonText='Gallery'
+							/>
+						</View>
+
+						<TouchableOpacity
+							activeOpacity={0.8}
+							style={styles.submitButton}
+							onPress={onSubmitButtonPress}
+						>
+							<Text style={styles.submitButtonText}>Submit</Text>
+						</TouchableOpacity>
 					</View>
-
-					<TouchableOpacity
-						activeOpacity={0.8}
-						style={styles.submitButton}
-						onPress={onSubmitButtonPress}
-					>
-						<Text style={styles.submitButtonText}>Submit</Text>
-					</TouchableOpacity>
-				</View>
-			</ImageBackground>
+				</ImageBackground>
+			</ScrollView>
 		</>
 	);
 };
