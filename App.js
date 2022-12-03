@@ -4,6 +4,7 @@ import {
 	SafeAreaView,
 	ImageBackground,
 	ScrollView,
+	Platform,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 // import Toast from 'react-native-toast-message';
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		marginTop: StatusBar.currentHeight,
 		flexDirection: 'column',
+		paddingVertical: 10,
 	},
 	imageBackground: {
 		flex: 1,
@@ -29,7 +31,9 @@ const styles = StyleSheet.create({
 export default function App() {
 	return (
 		<>
-			<StatusBar backgroundColor='fff' style='dark' />
+			{Platform.OS === 'ios' && (
+				<StatusBar backgroundColor='fff' style='dark' />
+			)}
 			<SafeAreaView style={styles.container}>
 				{/* <Toast /> */}
 				<ScrollView style={styles.scrollView}>
