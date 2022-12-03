@@ -12,10 +12,8 @@ export const Layout = ({ children }) => {
 	const styles = StyleSheet.create({
 		container: {
 			flex: 1,
-			marginTop: StatusBar.currentHeight,
-			flexDirection: 'column',
-			// paddingVertical: 10,
 			flexGrow: 1,
+			marginTop: StatusBar.currentHeight,
 		},
 	});
 

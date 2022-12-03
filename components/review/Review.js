@@ -22,12 +22,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column',
 		alignItems: 'center',
-		overflow: 'scroll',
 	},
 	container: {
 		flex: 1,
 		paddingBottom: 10,
-		overflow: 'scroll',
 	},
 	bookName: {
 		fontSize: 28,

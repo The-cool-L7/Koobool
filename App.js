@@ -5,10 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
 import Review from './components/review/Review';
+import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
 
 const styles = StyleSheet.create({});
@@ -43,10 +45,28 @@ export default function App() {
 							}}
 						/>
 						<Tab.Screen
+							name='Search Reviews'
+							component={SearchReview}
+							options={{
+								headerShown: false,
+								title: 'Search Reviews',
+								tabBarIcon: ({ focused }) => {
+									return (
+										<FontAwesome
+											name='search'
+											size={24}
+											color={focused ? '#0093E9' : 'black'}
+										/>
+									);
+								},
+							}}
+						/>
+						<Tab.Screen
 							name='Review'
 							component={Review}
 							options={{
 								headerShown: false,
+								title: 'Write Review',
 								tabBarIcon: ({ focused }) => {
 									return (
 										<MaterialIcons

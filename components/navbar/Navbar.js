@@ -1,4 +1,6 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Link } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
 	container: {
@@ -9,28 +11,16 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		paddingHorizontal: 30,
 	},
-	userImage: {
-		width: 45,
-		height: 45,
-	},
-	closeImage: {
-		width: 45,
-		height: 45,
-	},
 });
 
 const Navbar = () => {
 	return (
 		<>
 			<View style={styles.container}>
-				<Image
-					source={require('../../assets/navbar/user.png')}
-					style={styles.userImage}
-				/>
-				<Image
-					source={require('../../assets/navbar/close.png')}
-					style={styles.closeImage}
-				/>
+				<FontAwesome name='user-circle-o' size={35} color='black' />
+				<Link to={{ screen: 'Home' }}>
+					<FontAwesome name='close' size={35} color='black' />
+				</Link>
 			</View>
 		</>
 	);
