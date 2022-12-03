@@ -1,32 +1,19 @@
 import React from 'react';
-import {
-	StyleSheet,
-	SafeAreaView,
-	ImageBackground,
-	ScrollView,
-	Platform,
-} from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-// import Toast from 'react-native-toast-message';
-// import { ToastProvider } from 'react-native-toast-notifications';
+import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Navbar from './components/navbar/Navbar';
+import Home from './components/home/Home';
 import Review from './components/review/Review';
+import { Layout } from './components/utilities/utils';
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		marginTop: StatusBar.currentHeight,
-		flexDirection: 'column',
-		paddingVertical: 10,
-	},
-	imageBackground: {
-		flex: 1,
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
-	scrollView: {},
-});
+const styles = StyleSheet.create({});
+
+// const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
 	return (
@@ -34,19 +21,28 @@ export default function App() {
 			{Platform.OS === 'ios' && (
 				<StatusBar backgroundColor='fff' style='dark' />
 			)}
-			<SafeAreaView style={styles.container}>
-				{/* <Toast /> */}
-				<ScrollView style={styles.scrollView}>
-					<ImageBackground
-						source={require('./assets/review-page/review-bkg-image-white.png')}
-						resizeMode='cover'
-						style={styles.imageBackground}
-					>
-						<Navbar />
-						<Review />
-					</ImageBackground>
-				</ScrollView>
-			</SafeAreaView>
+
+			<Layout>
+				<NavigationContainer>
+					<Navbar />
+					<Tab.Navigator initialRouteName='Home'>
+						<Tab.Screen
+							name='Home'
+							component={Home}
+							options={{
+								headerShown: false,
+							}}
+						/>
+						<Tab.Screen
+							name='Review'
+							component={Review}
+							options={{
+								headerShown: false,
+							}}
+						/>
+					</Tab.Navigator>
+				</NavigationContainer>
+			</Layout>
 		</>
 	);
 }
