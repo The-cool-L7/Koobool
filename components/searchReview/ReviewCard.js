@@ -60,7 +60,7 @@ const ReviewCard = (props) => {
 								size={24}
 								color='black'
 							/>
-							<Gap size={15} />
+							<Gap size={7} />
 							<Text style={styles.username}>{username}</Text>
 						</View>
 					</View>

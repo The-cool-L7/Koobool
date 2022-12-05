@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Text,
 	StyleSheet,
@@ -10,8 +10,11 @@ import {
 	View,
 } from 'react-native';
 
+import { FontAwesome } from '@expo/vector-icons';
+
 import ReviewCard from './ReviewCard';
 import bookLists from '../../dummy-data/bookLists.json';
+import { Gap } from '../utilities/utils';
 
 const styles = StyleSheet.create({
 	scrollView: {
@@ -29,10 +32,15 @@ const styles = StyleSheet.create({
 		flexGrow: 1,
 		alignItems: 'center',
 	},
+	searchInputView: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 	searchInput: {
 		height: 40,
 		borderWidth: 0.5,
-		width: '100%',
+		width: '85%',
 		paddingHorizontal: 15,
 		paddingVertical: 13,
 		backgroundColor: '#fff',
@@ -53,7 +61,18 @@ const styles = StyleSheet.create({
 });
 
 const SearchReview = () => {
-	const [searchText, onChangeSearchText] = useState();
+	const [searchText, onChangeSearchText] = useState('');
+	const [filteredBookList, setFilteredBookList] = useState([]);
+
+	const onSearchInputChange = () => {
+		if (searchText.length !== 0) {
+			const filtered = bookLists.books.filter((b) =>
+				b.bookName.includes(searchText),
+			);
+
+			setFilteredBookList(() => filtered);
+		}
+	};
 
 	return (
 		<>
@@ -67,23 +86,40 @@ const SearchReview = () => {
 					style={styles.imageBackground}
 				>
 					<View style={styles.container}>
-						<TextInput
-							style={styles.searchInput}
-							onChangeText={onChangeSearchText}
-							value={searchText}
-							placeholder='Search'
-						/>
+						<View style={styles.searchInputView}>
+							<FontAwesome name='search' size={24} color='black' />
+							<Gap size={15} />
+							<TextInput
+								style={styles.searchInput}
+								onChangeText={onChangeSearchText}
+								onChange={onSearchInputChange}
+								value={searchText}
+								placeholder='Search book...'
+							/>
+						</View>
 						<Text style={styles.recentReviewsText}>Recent reviews:</Text>
 						<View style={styles.reviewCards}>
-							{bookLists.books.map((book, index) => (
-								<ReviewCard
-									username={book.username}
-									bookName={book.bookName}
-									bookCoverSrc={book.bookCoverSrc}
-									drawingSrc={book.drawingSrc}
-									key={index}
-								/>
-							))}
+							{searchText.length === 0 &&
+								bookLists.books.map((book, index) => (
+									<ReviewCard
+										username={book.username}
+										bookName={book.bookName}
+										bookCoverSrc={book.bookCoverSrc}
+										drawingSrc={book.drawingSrc}
+										key={index}
+									/>
+								))}
+
+							{searchText.length !== 0 &&
+								filteredBookList.map((book, index) => (
+									<ReviewCard
+										username={book.username}
+										bookName={book.bookName}
+										bookCoverSrc={book.bookCoverSrc}
+										drawingSrc={book.drawingSrc}
+										key={index}
+									/>
+								))}
 						</View>
 					</View>
 				</ImageBackground>
