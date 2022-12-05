@@ -11,9 +11,12 @@ import {
 } from 'react-native';
 
 import ReviewCard from './ReviewCard';
+import bookLists from '../../dummy-data/bookLists.json';
 
 const styles = StyleSheet.create({
-	scrollView: {},
+	scrollView: {
+		flex: 1,
+	},
 	container: {
 		flex: 1,
 		flexGrow: 1,
@@ -54,7 +57,10 @@ const SearchReview = () => {
 
 	return (
 		<>
-			<ScrollView contentContainerStyle={styles.scrollView}>
+			<ScrollView
+				style={{ flex: 1 }}
+				contentContainerStyle={{ flexGrow: 1 }}
+			>
 				<ImageBackground
 					source={require('../../assets/search-page/search-bkg-image-white.png')}
 					resizeMode='cover'
@@ -69,21 +75,14 @@ const SearchReview = () => {
 						/>
 						<Text style={styles.recentReviewsText}>Recent reviews:</Text>
 						<View style={styles.reviewCards}>
-							<ReviewCard
-								username='Alex'
-								bookCoverSrc='https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png'
-								drawingSrc='https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png'
-							/>
-							<ReviewCard
-								username='John'
-								bookCoverSrc='https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png'
-								drawingSrc='https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png'
-							/>
-							<ReviewCard
-								username='Hamid'
-								bookCoverSrc='https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png'
-								drawingSrc='https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png'
-							/>
+							{bookLists.books.map((book, index) => (
+								<ReviewCard
+									username={book.username}
+									bookCoverSrc={book.bookCoverSrc}
+									drawingSrc={book.drawingSrc}
+									key={index}
+								/>
+							))}
 						</View>
 					</View>
 				</ImageBackground>
