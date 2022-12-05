@@ -71,18 +71,18 @@ const SearchReview = () => {
 						<View style={styles.reviewCards}>
 							<ReviewCard
 								username='Alex'
-								bookCoverSrc='../../assets/dummy-images/cover-1.png'
-								drawingSrc='../../assets/dummy-images/drawing-1.png'
+								bookCoverSrc='https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png'
+								drawingSrc='https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png'
 							/>
 							<ReviewCard
 								username='John'
-								bookCoverSrc='../../assets/dummy-images/cover-1.png'
-								drawingSrc='../../assets/dummy-images/drawing-1.png'
+								bookCoverSrc='https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png'
+								drawingSrc='https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png'
 							/>
 							<ReviewCard
 								username='Hamid'
-								bookCoverSrc='../../assets/dummy-images/cover-1.png'
-								drawingSrc='../../assets/dummy-images/drawing-1.png'
+								bookCoverSrc='https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png'
+								drawingSrc='https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png'
 							/>
 						</View>
 					</View>

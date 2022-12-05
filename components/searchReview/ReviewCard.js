@@ -48,14 +48,16 @@ const ReviewCard = (props) => {
 						<Text style={styles.username}>{username}</Text>
 					</View>
 					<Image
-						source={require('../../assets/dummy-images/cover-1.png')}
+						source={{
+							uri: bookCoverSrc,
+						}}
 						resizeMode='cover'
 						style={styles.bookCoverImage}
 					/>
 				</View>
 				<View style={styles.bottom}>
 					<Image
-						source={require('../../assets/dummy-images/drawing-1.png')}
+						source={{ uri: drawingSrc }}
 						resizeMode='cover'
 						style={styles.drawingImage}
 					/>
