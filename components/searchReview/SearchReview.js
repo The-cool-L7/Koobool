@@ -78,6 +78,7 @@ const SearchReview = () => {
 							{bookLists.books.map((book, index) => (
 								<ReviewCard
 									username={book.username}
+									bookName={book.bookName}
 									bookCoverSrc={book.bookCoverSrc}
 									drawingSrc={book.drawingSrc}
 									key={index}

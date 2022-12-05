@@ -52,7 +52,7 @@ const ReviewCard = (props) => {
 				<View style={styles.top}>
 					<View style={styles.topLeft}>
 						<View style={styles.topLeftTop}>
-							<Text style={styles.bookName}>Test {bookName}</Text>
+							<Text style={styles.bookName}>{bookName}</Text>
 						</View>
 						<View style={styles.topLeftBottom}>
 							<FontAwesome
