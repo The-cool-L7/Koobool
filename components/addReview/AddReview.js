@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import {
 	Image,
 	StyleSheet,
@@ -12,6 +11,7 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
+import { Link } from '@react-navigation/native';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
@@ -39,25 +39,42 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		marginTop: 20,
 	},
+	emptyPreviewImage: {
+		width: 'auto',
+		height: 250,
+		backgroundColor: '#e5e5e5',
+		borderRadius: 10,
+		marginTop: 20,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	emptyPreviewImageText: {
+		color: '#7f7f7f',
+		fontWeight: 'bold',
+		fontSize: 18,
+	},
 	buttons: {
 		flexDirection: 'row',
 		justifyContent: 'center',
 		marginVertical: 20,
 	},
 	submitButton: {
-		backgroundColor: '#1e1e1e',
+		backgroundColor: '#FAC710',
 		paddingHorizontal: 20,
 		paddingVertical: 15,
 		alignItems: 'center',
 		borderRadius: 10,
 	},
 	submitButtonText: {
-		color: '#fff',
+		color: '#1e1e1e',
 		textAlign: 'center',
+		fontWeight: 'bold',
 	},
 });
 
-const Review = () => {
+const AddReview = (props) => {
+	const { navigation } = props;
+
 	const [image, setImage] = useState(null);
 
 	const onGalleryButtonPress = async () => {
@@ -87,7 +104,17 @@ const Review = () => {
 	};
 
 	const onSubmitButtonPress = () => {
+		if (!image) {
+			Alert.alert(
+				'Please take a picture or upload an image to submit a review!',
+			);
+
+			return;
+		}
+
 		Alert.alert('Submitted successfully!');
+
+		navigation.navigate('Home');
 	};
 
 	return (
@@ -101,7 +128,18 @@ const Review = () => {
 					<View style={styles.container}>
 						<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
 						<BookInfo text='What did you think of Matilda?' />
-						<Image style={styles.previewImage} source={{ uri: image }} />
+						{image ? (
+							<Image
+								style={styles.previewImage}
+								source={{ uri: image }}
+							/>
+						) : (
+							<View style={styles.emptyPreviewImage}>
+								<Text style={styles.emptyPreviewImageText}>
+									Image preview
+								</Text>
+							</View>
+						)}
 
 						<View style={styles.buttons}>
 							<ReviewButton
@@ -129,4 +167,4 @@ const Review = () => {
 	);
 };
 
-export default Review;
+export default AddReview;

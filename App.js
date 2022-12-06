@@ -9,7 +9,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
-import Review from './components/review/Review';
+import AddReview from './components/addReview/AddReview';
 import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
 
@@ -63,7 +63,7 @@ export default function App() {
 						/>
 						<Tab.Screen
 							name='Review'
-							component={Review}
+							component={AddReview}
 							options={{
 								headerShown: false,
 								title: 'Write Review',
