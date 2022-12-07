@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 	},
 	searchInput: {
 		height: 40,
-		borderWidth: 0.5,
+		borderWidth: 1.5,
 		width: '85%',
 		paddingHorizontal: 15,
 		paddingVertical: 13,
