@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
-import { Link } from '@react-navigation/native';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
