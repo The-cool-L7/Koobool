@@ -9,9 +9,10 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
-import Review from './components/review/Review';
+import AddReview from './components/addReview/AddReview';
 import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
+import AddReviewHome from './components/addReview/AddReviewHome';
 
 const styles = StyleSheet.create({});
 
@@ -62,11 +63,11 @@ export default function App() {
 							}}
 						/>
 						<Tab.Screen
-							name='Review'
-							component={Review}
+							name='Add Review Home'
+							component={AddReviewHome}
 							options={{
 								headerShown: false,
-								title: 'Write Review',
+								title: 'Add Review',
 								tabBarIcon: ({ focused }) => {
 									return (
 										<MaterialIcons

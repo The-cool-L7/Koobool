@@ -29,7 +29,9 @@ const BookInfo = (props) => {
 			<View style={styles.container}>
 				<View style={styles.bookImageView}>
 					<Image
-						source={require('../../assets/review-page/dummy-book-cover.png')}
+						source={{
+							uri: 'https://user-images.githubusercontent.com/52258261/205751224-e47d8809-6f92-4122-bc4a-037389fff5eb.png',
+						}}
 						style={styles.bookImage}
 					/>
 				</View>

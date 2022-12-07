@@ -1,0 +1,40 @@
+{
+	"books": [
+		{
+			"username": "Alex",
+			"bookName": "Little Kid Riding Hood",
+			"bookCoverSrc": "https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png",
+			"drawingSrc": "https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png"
+		},
+		{
+			"username": "Ben",
+			"bookName": "Alice's Adventure",
+			"bookCoverSrc": "https://user-images.githubusercontent.com/52258261/205722092-5f0de91a-1dc0-4126-9811-df55e21d5f45.png",
+			"drawingSrc": "https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png"
+		},
+		{
+			"username": "John",
+			"bookName": "Alice's Adventure",
+			"bookCoverSrc": "https://user-images.githubusercontent.com/52258261/205722092-5f0de91a-1dc0-4126-9811-df55e21d5f45.png",
+			"drawingSrc": "https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png"
+		},
+		{
+			"username": "Mike",
+			"bookName": "Little Kid Riding Hood",
+			"bookCoverSrc": "https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png",
+			"drawingSrc": "https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png"
+		},
+		{
+			"username": "Mike",
+			"bookName": "Roald Dahl The BFG",
+			"bookCoverSrc": "https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png",
+			"drawingSrc": "https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png"
+		},
+		{
+			"username": "Amanda",
+			"bookName": "Roald Dahl The BFG",
+			"bookCoverSrc": "https://user-images.githubusercontent.com/52258261/205722052-f0879a8e-9456-427c-8f6c-1b4bdebcf752.png",
+			"drawingSrc": "https://user-images.githubusercontent.com/52258261/205722334-166b6e09-c9ef-4347-a5b7-57fccd35305e.png"
+		}
+	]
+}

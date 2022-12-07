@@ -26,36 +26,55 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	bottom: { flexDirection: 'row', marginTop: 20 },
-	topLeft: {
+	topLeft: {},
+	topLeftTop: {},
+	topLeftBottom: {
+		marginTop: 10,
 		flexDirection: 'row',
+		alignItems: 'center',
 	},
 	username: {
+		fontSize: 17,
+	},
+	bookName: {
 		fontWeight: 'bold',
-		fontSize: 23,
+		fontSize: 18,
+		maxWidth: 120,
 	},
 });
 
 const ReviewCard = (props) => {
-	const { username, bookCoverSrc, drawingSrc } = props;
+	const { username, bookCoverSrc, drawingSrc, bookName } = props;
 
 	return (
 		<>
 			<View style={styles.container}>
 				<View style={styles.top}>
 					<View style={styles.topLeft}>
-						<FontAwesome name='user-circle-o' size={24} color='black' />
-						<Gap size={15} />
-						<Text style={styles.username}>{username}</Text>
+						<View style={styles.topLeftTop}>
+							<Text style={styles.bookName}>{bookName}</Text>
+						</View>
+						<View style={styles.topLeftBottom}>
+							<FontAwesome
+								name='user-circle-o'
+								size={24}
+								color='black'
+							/>
+							<Gap size={7} />
+							<Text style={styles.username}>{username}</Text>
+						</View>
 					</View>
 					<Image
-						source={require('../../assets/dummy-images/cover-1.png')}
+						source={{
+							uri: bookCoverSrc,
+						}}
 						resizeMode='cover'
 						style={styles.bookCoverImage}
 					/>
 				</View>
 				<View style={styles.bottom}>
 					<Image
-						source={require('../../assets/dummy-images/drawing-1.png')}
+						source={{ uri: drawingSrc }}
 						resizeMode='cover'
 						style={styles.drawingImage}
 					/>

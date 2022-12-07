@@ -1,35 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
-	Text,
+	Image,
 	StyleSheet,
-	TextInput,
-	ScrollView,
-	ImageBackground,
 	View,
+	Alert,
+	Text,
+	TouchableOpacity,
+	ImageBackground,
+	ScrollView,
+	TextInput,
 } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FontAwesome } from '@expo/vector-icons';
 
-import ReviewCard from './ReviewCard';
-import bookLists from '../../dummy-data/bookLists.json';
 import { Gap } from '../utilities/utils';
+import AddReview from './AddReview';
+import Book from './Book';
+import bookImages from '../../dummy-data/bookImages.json';
+import bookLists from '../../dummy-data/bookLists.json';
 
 const styles = StyleSheet.create({
-	scrollView: {
+	imageBackground: {
 		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 	container: {
 		flex: 1,
 		flexGrow: 1,
 		paddingBottom: 10,
 		width: '100%',
-		paddingHorizontal: 30,
+		paddingHorizontal: 10,
 	},
-	imageBackground: {
-		flex: 1,
-		flexGrow: 1,
-		alignItems: 'center',
-	},
+	title: {},
 	searchInputView: {
 		flexDirection: 'row',
 		alignItems: 'center',
@@ -46,25 +51,25 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		borderRadius: 10,
 	},
-	recentReviewsText: {
-		marginVertical: 20,
-		marginBottom: 5,
-		fontWeight: 'bold',
-		fontSize: 22,
-	},
-	reviewCards: {
-		alignItems: 'center',
-		width: '100%',
+	bookLists: {
+		marginTop: 10,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
 	},
 });
 
-const SearchReview = () => {
+const Stack = createNativeStackNavigator();
+
+const AddReviewHome = (props) => {
+	const { navigation } = props;
+
 	const [searchText, onChangeSearchText] = useState('');
 	const [filteredBookList, setFilteredBookList] = useState([]);
 
 	const onSearchInputChange = () => {
 		if (searchText.length !== 0) {
-			const filtered = bookLists.books.filter((b) =>
+			const filtered = bookImages.images.filter((b) =>
 				b.bookName.includes(searchText),
 			);
 
@@ -79,7 +84,7 @@ const SearchReview = () => {
 				contentContainerStyle={{ flexGrow: 1 }}
 			>
 				<ImageBackground
-					source={require('../../assets/search-page/search-bkg-image-white.png')}
+					source={require('../../assets/review-page/review-bkg-image-white.png')}
 					resizeMode='cover'
 					style={styles.imageBackground}
 				>
@@ -95,35 +100,33 @@ const SearchReview = () => {
 								placeholder='Search book...'
 							/>
 						</View>
-						<Text style={styles.recentReviewsText}>Recent reviews:</Text>
-						<View style={styles.reviewCards}>
+						<View style={styles.bookLists}>
 							{searchText.length === 0 &&
-								bookLists.books.map((book, index) => (
-									<ReviewCard
-										username={book.username}
+								bookImages.images.map((book, index) => (
+									<Book
+										bookImageUrl={book.imageUrl}
 										bookName={book.bookName}
-										bookCoverSrc={book.bookCoverSrc}
-										drawingSrc={book.drawingSrc}
 										key={index}
 									/>
 								))}
 
 							{searchText.length !== 0 &&
 								filteredBookList.map((book, index) => (
-									<ReviewCard
-										username={book.username}
+									<Book
+										bookImageUrl={book.imageUrl}
 										bookName={book.bookName}
-										bookCoverSrc={book.bookCoverSrc}
-										drawingSrc={book.drawingSrc}
 										key={index}
 									/>
 								))}
 						</View>
 					</View>
+					<Stack.Navigator>
+						<Stack.Screen name='Add Review' component={AddReview} />
+					</Stack.Navigator>
 				</ImageBackground>
 			</ScrollView>
 		</>
 	);
 };
 
-export default SearchReview;
+export default AddReviewHome;

@@ -3,7 +3,11 @@ import { View, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 export const Gap = ({ size, direction = 'horizontal' }) => {
 	return (
 		<View
-			style={{ [direction === 'horizontal' ? 'width' : 'height']: size }}
+			style={{
+				width:
+					direction === 'horizontal' || direction === 'both' ? size : 0,
+				height: direction === 'vertical' || direction === 'both' ? size : 0,
+			}}
 		/>
 	);
 };
