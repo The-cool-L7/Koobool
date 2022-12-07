@@ -77,6 +77,11 @@ const AddReviewHome = (props) => {
 		}
 	};
 
+	const onBookPress = (bookName, bookIndex) => {
+		console.log('hello');
+		navigation.navigate('Add Review');
+	};
+
 	return (
 		<>
 			<ScrollView
@@ -116,6 +121,7 @@ const AddReviewHome = (props) => {
 										bookImageUrl={book.imageUrl}
 										bookName={book.bookName}
 										key={index}
+										onPress={onBookPress}
 									/>
 								))}
 						</View>
