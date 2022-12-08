@@ -112,6 +112,7 @@ const AddReviewHome = (props) => {
 										bookImageUrl={book.imageUrl}
 										bookName={book.bookName}
 										key={index}
+										onPress={onBookPress}
 									/>
 								))}
 
@@ -126,9 +127,9 @@ const AddReviewHome = (props) => {
 								))}
 						</View>
 					</View>
-					<Stack.Navigator>
+					{/* <Stack.Navigator>
 						<Stack.Screen name='Add Review' component={AddReview} />
-					</Stack.Navigator>
+					</Stack.Navigator> */}
 				</ImageBackground>
 			</ScrollView>
 		</>

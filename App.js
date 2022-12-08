@@ -79,6 +79,25 @@ export default function App() {
 								},
 							}}
 						/>
+						<Tab.Screen
+							name='Add Review'
+							component={AddReview}
+							options={{
+								headerShown: false,
+								title: 'Add Review',
+								tabBarButton: () => null,
+								tabBarVisible: false, //hide tab bar on this screen
+								tabBarIcon: ({ focused }) => {
+									return (
+										<MaterialIcons
+											name='rate-review'
+											size={24}
+											color={focused ? '#0093E9' : 'black'}
+										/>
+									);
+								},
+							}}
+						/>
 					</Tab.Navigator>
 				</NavigationContainer>
 			</Layout>
