@@ -2,23 +2,23 @@
 	"books": [
 		{
 			"bookName": "Kid Normal",
-			"imageUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/Kid%20Normal.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL0tpZCBOb3JtYWwuanBnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwNDM2NDc5LCJleHAiOjE5ODU3OTY0Nzl9.jxD8qmEgrxhtDoPRObb0_G7JNOpBCNtEEky4UAELIOA"
+			"bookCoverUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/Kid%20Normal.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL0tpZCBOb3JtYWwuanBnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwNDM2NDc5LCJleHAiOjE5ODU3OTY0Nzl9.jxD8qmEgrxhtDoPRObb0_G7JNOpBCNtEEky4UAELIOA"
 		},
 		{
 			"bookName": "Bad Dad",
-			"imageUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/Bad%20Dad.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL0JhZCBEYWQuanBnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwNDM2NTUzLCJleHAiOjE5ODU3OTY1NTN9.su6-kQ5sCGVXNAeaERskyIRKhlV2zs0MaZGOMwPgufY&t=2022-12-07T18%3A09%3A13.803Z"
+			"bookCoverUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/Bad%20Dad.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL0JhZCBEYWQuanBnIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwNDM2NTUzLCJleHAiOjE5ODU3OTY1NTN9.su6-kQ5sCGVXNAeaERskyIRKhlV2zs0MaZGOMwPgufY&t=2022-12-07T18%3A09%3A13.803Z"
 		},
 		{
 			"bookName": "The Fox and the Star",
-			"imageUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Fox%20and%20the%20Star.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBGb3ggYW5kIHRoZSBTdGFyLmpwZyIsInRyYW5zZm9ybWF0aW9ucyI6IiIsImlhdCI6MTY3MDQzNjU2OSwiZXhwIjoxOTg1Nzk2NTY5fQ.4g8sovRMkZsAaj4od5ZrJ-AYooXrvgBn0uVldHY90ms"
+			"bookCoverUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Fox%20and%20the%20Star.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBGb3ggYW5kIHRoZSBTdGFyLmpwZyIsInRyYW5zZm9ybWF0aW9ucyI6IiIsImlhdCI6MTY3MDQzNjU2OSwiZXhwIjoxOTg1Nzk2NTY5fQ.4g8sovRMkZsAaj4od5ZrJ-AYooXrvgBn0uVldHY90ms"
 		},
 		{
 			"bookName": "The Day I Was Erased",
-			"imageUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Day%20I%20Was%20Erased.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBEYXkgSSBXYXMgRXJhc2VkLmpwZyIsInRyYW5zZm9ybWF0aW9ucyI6IiIsImlhdCI6MTY3MDQzNjk3MCwiZXhwIjoxOTg1Nzk2OTcwfQ.l7WYfHsQri9RVM_QV5OiCt0JQg4ENCZ3fJ5C8po0IWI&t=2022-12-07T18%3A16%3A10.098Z"
+			"bookCoverUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Day%20I%20Was%20Erased.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBEYXkgSSBXYXMgRXJhc2VkLmpwZyIsInRyYW5zZm9ybWF0aW9ucyI6IiIsImlhdCI6MTY3MDQzNjk3MCwiZXhwIjoxOTg1Nzk2OTcwfQ.l7WYfHsQri9RVM_QV5OiCt0JQg4ENCZ3fJ5C8po0IWI&t=2022-12-07T18%3A16%3A10.098Z"
 		},
 		{
 			"bookName": "The Lion and The Witch",
-			"imageUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Lion,%20the%20Witch%20and%20the%20Wardrobe.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBMaW9uLCB0aGUgV2l0Y2ggYW5kIHRoZSBXYXJkcm9iZS5qcGciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA0MzY1NzksImV4cCI6MTk4NTc5NjU3OX0.FqBgxS3L0DVP4_ULeOsa7Iae8Cqvgkold7pIEQSx9Bc"
+			"bookCoverUrl": "https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Lion,%20the%20Witch%20and%20the%20Wardrobe.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBMaW9uLCB0aGUgV2l0Y2ggYW5kIHRoZSBXYXJkcm9iZS5qcGciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA0MzY1NzksImV4cCI6MTk4NTc5NjU3OX0.FqBgxS3L0DVP4_ULeOsa7Iae8Cqvgkold7pIEQSx9Bc"
 		}
 	]
 }

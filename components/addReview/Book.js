@@ -20,7 +20,10 @@ const Book = (props) => {
 
 	return (
 		<>
-			<TouchableOpacity style={styles.bookView} onPress={onPress}>
+			<TouchableOpacity
+				style={styles.bookView}
+				onPress={() => onPress(bookName, bookImageUrl)}
+			>
 				<Image
 					style={styles.bookImage}
 					source={{

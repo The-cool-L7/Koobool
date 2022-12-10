@@ -71,9 +71,14 @@ const AllBooks = (props) => {
 		}
 	};
 
-	const onBookPress = (bookName, bookIndex) => {
-		console.log('hello');
-		navigation.navigate('Add Review');
+	const onBookPress = (bookName, bookCoverUrl, bookIndex) => {
+		console.log('all book name', bookName);
+		console.log('all book image', bookCoverUrl);
+
+		navigation.navigate('Add Review Form', {
+			bookName: bookName,
+			bookCoverUrl: bookCoverUrl,
+		});
 	};
 
 	return (
@@ -103,7 +108,7 @@ const AllBooks = (props) => {
 							{searchText.length === 0 &&
 								books.books.map((book, index) => (
 									<Book
-										bookImageUrl={book.imageUrl}
+										bookImageUrl={book.bookCoverUrl}
 										bookName={book.bookName}
 										key={index}
 										onPress={onBookPress}
@@ -113,7 +118,7 @@ const AllBooks = (props) => {
 							{searchText.length !== 0 &&
 								filteredBookList.map((book, index) => (
 									<Book
-										bookImageUrl={book.imageUrl}
+										bookImageUrl={book.bookCoverUrl}
 										bookName={book.bookName}
 										key={index}
 										onPress={onBookPress}

@@ -15,7 +15,7 @@ const AddReviewHome = () => {
 					options={{ headerShown: false }}
 				/>
 				<Stack.Screen
-					name='Add Review'
+					name='Add Review Form'
 					component={AddReviewForm}
 					// options={{ headerShown: false }}
 				/>

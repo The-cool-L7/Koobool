@@ -102,7 +102,7 @@ const SearchReview = () => {
 									<ReviewCard
 										username={book.username}
 										bookName={book.bookName}
-										bookCoverSrc={book.bookCoverSrc}
+										bookCoverSrc={book.bookCoverUrl}
 										drawingSrc={book.drawingSrc}
 										key={index}
 									/>
@@ -113,7 +113,7 @@ const SearchReview = () => {
 									<ReviewCard
 										username={book.username}
 										bookName={book.bookName}
-										bookCoverSrc={book.bookCoverSrc}
+										bookCoverSrc={book.bookCoverUrl}
 										drawingSrc={book.drawingSrc}
 										key={index}
 									/>

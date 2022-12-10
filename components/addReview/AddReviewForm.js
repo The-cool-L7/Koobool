@@ -72,9 +72,11 @@ const styles = StyleSheet.create({
 });
 
 const AddReviewForm = (props) => {
-	const { navigation } = props;
+	const { navigation, route } = props;
 
 	const [image, setImage] = useState(null);
+
+	const { bookName, bookCoverUrl } = route.params;
 
 	const onGalleryButtonPress = async () => {
 		const result = await ImagePicker.launchImageLibraryAsync({
@@ -125,8 +127,11 @@ const AddReviewForm = (props) => {
 					style={styles.imageBackground}
 				>
 					<View style={styles.container}>
-						<Text style={styles.bookName}>Matilda, Roald Dahl</Text>
-						<BookInfo text='What did you think of Matilda?' />
+						<Text style={styles.bookName}>{bookName}</Text>
+						<BookInfo
+							text={`What did you think of ${bookName}`}
+							bookCoverUrl={bookCoverUrl}
+						/>
 						{image ? (
 							<Image
 								style={styles.previewImage}
