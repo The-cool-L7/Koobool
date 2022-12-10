@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import { Link } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
 	container: {
@@ -19,7 +20,7 @@ const Navbar = () => {
 			<View style={styles.container}>
 				<FontAwesome name='user-circle-o' size={35} color='black' />
 				<Link to={{ screen: 'Home' }}>
-					<FontAwesome name='close' size={35} color='black' />
+					<Entypo name='home' size={35} color='black' />
 				</Link>
 			</View>
 		</>
