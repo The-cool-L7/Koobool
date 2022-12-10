@@ -9,7 +9,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
-import AddReview from './components/addReview/AddReview';
+import AddReview from './components/addReview/AddReviewForm';
 import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
 import AddReviewHome from './components/addReview/AddReviewHome';
@@ -68,25 +68,6 @@ export default function App() {
 							options={{
 								headerShown: false,
 								title: 'Add Review',
-								tabBarIcon: ({ focused }) => {
-									return (
-										<MaterialIcons
-											name='rate-review'
-											size={24}
-											color={focused ? '#0093E9' : 'black'}
-										/>
-									);
-								},
-							}}
-						/>
-						<Tab.Screen
-							name='Add Review'
-							component={AddReview}
-							options={{
-								headerShown: false,
-								title: 'Add Review',
-								tabBarButton: () => null,
-								tabBarVisible: false, //hide tab bar on this screen
 								tabBarIcon: ({ focused }) => {
 									return (
 										<MaterialIcons

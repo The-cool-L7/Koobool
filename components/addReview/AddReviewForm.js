@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-const AddReview = (props) => {
+const AddReviewForm = (props) => {
 	const { navigation } = props;
 
 	const [image, setImage] = useState(null);
@@ -166,4 +166,4 @@ const AddReview = (props) => {
 	);
 };
 
-export default AddReview;
+export default AddReviewForm;
