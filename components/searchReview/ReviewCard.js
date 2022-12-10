@@ -6,8 +6,8 @@ import { Gap } from '../utilities/utils';
 const styles = StyleSheet.create({
 	container: {
 		padding: 25,
-		borderWidth: 0.5,
-		backgroundColor: '#fff',
+		// borderWidth: 0.5,
+		backgroundColor: '#f1f1f1',
 		width: '100%',
 		borderRadius: 25,
 		marginTop: 20,

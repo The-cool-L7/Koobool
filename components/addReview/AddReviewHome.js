@@ -17,7 +17,7 @@ const AddReviewHome = () => {
 				<Stack.Screen
 					name='Add Review'
 					component={AddReviewForm}
-					options={{ headerShown: false }}
+					// options={{ headerShown: false }}
 				/>
 			</Stack.Navigator>
 		</>

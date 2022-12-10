@@ -15,8 +15,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { Gap } from '../utilities/utils';
 import Book from './Book';
-import bookImages from '../../dummy-data/bookImages.json';
-import bookLists from '../../dummy-data/bookLists.json';
+import books from '../../dummy-data/books.json';
 
 const styles = StyleSheet.create({
 	imageBackground: {
@@ -64,7 +63,7 @@ const AllBooks = (props) => {
 
 	const onSearchInputChange = () => {
 		if (searchText.length !== 0) {
-			const filtered = bookImages.images.filter((b) =>
+			const filtered = books.books.filter((b) =>
 				b.bookName.includes(searchText),
 			);
 
@@ -102,7 +101,7 @@ const AllBooks = (props) => {
 						</View>
 						<View style={styles.bookLists}>
 							{searchText.length === 0 &&
-								bookImages.images.map((book, index) => (
+								books.books.map((book, index) => (
 									<Book
 										bookImageUrl={book.imageUrl}
 										bookName={book.bookName}

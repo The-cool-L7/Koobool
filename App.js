@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -9,12 +9,9 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
-import AddReview from './components/addReview/AddReviewForm';
 import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
 import AddReviewHome from './components/addReview/AddReviewHome';
-
-const styles = StyleSheet.create({});
 
 const Tab = createBottomTabNavigator();
 

@@ -11,7 +11,7 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 
 import ReviewCard from './ReviewCard';
-import bookLists from '../../dummy-data/bookLists.json';
+import bookReviews from '../../dummy-data/bookReviews.json';
 import { Gap } from '../utilities/utils';
 
 const styles = StyleSheet.create({
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 		flexGrow: 1,
 		paddingBottom: 10,
 		width: '100%',
-		paddingHorizontal: 30,
+		paddingHorizontal: 10,
 	},
 	imageBackground: {
 		flex: 1,
@@ -64,7 +64,7 @@ const SearchReview = () => {
 
 	const onSearchInputChange = () => {
 		if (searchText.length !== 0) {
-			const filtered = bookLists.books.filter((b) =>
+			const filtered = bookReviews.reviews.filter((b) =>
 				b.bookName.includes(searchText),
 			);
 
@@ -98,7 +98,7 @@ const SearchReview = () => {
 						<Text style={styles.recentReviewsText}>Recent reviews:</Text>
 						<View style={styles.reviewCards}>
 							{searchText.length === 0 &&
-								bookLists.books.map((book, index) => (
+								bookReviews.reviews.map((book, index) => (
 									<ReviewCard
 										username={book.username}
 										bookName={book.bookName}
