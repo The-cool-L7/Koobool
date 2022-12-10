@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 		height: 200,
 	},
 	bookText: {
-		fontSize: 25,
+		fontSize: 23,
 		maxWidth: '50%',
 		// fontFamily: 'Robot',
 		fontWeight: 'bold',

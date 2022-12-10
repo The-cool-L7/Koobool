@@ -25,6 +25,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingBottom: 10,
+		paddingTop: 20,
+		paddingHorizontal: 10,
 	},
 	bookName: {
 		fontSize: 28,
@@ -127,9 +129,8 @@ const AddReviewForm = (props) => {
 					style={styles.imageBackground}
 				>
 					<View style={styles.container}>
-						<Text style={styles.bookName}>{bookName}</Text>
 						<BookInfo
-							text={`What did you think of ${bookName}`}
+							text={`What did you think of the book: ${bookName}`}
 							bookCoverUrl={bookCoverUrl}
 						/>
 						{image ? (

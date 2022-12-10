@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
 	Image,
 	StyleSheet,
@@ -16,6 +16,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Gap } from '../utilities/utils';
 import Book from './Book';
 import books from '../../dummy-data/books.json';
+import { supabase } from '../../lib/supabase';
 
 const styles = StyleSheet.create({
 	imageBackground: {
@@ -59,12 +60,13 @@ const AllBooks = (props) => {
 	const { navigation } = props;
 
 	const [searchText, onChangeSearchText] = useState('');
+	const [allBooks, setAllBooks] = useState([]);
 	const [filteredBookList, setFilteredBookList] = useState([]);
 
 	const onSearchInputChange = () => {
-		if (searchText.length !== 0) {
-			const filtered = books.books.filter((b) =>
-				b.bookName.includes(searchText),
+		if (searchText.length !== 0 && allBooks.length > 0) {
+			const filtered = allBooks.filter((b) =>
+				b.book_name.includes(searchText),
 			);
 
 			setFilteredBookList(() => filtered);
@@ -72,14 +74,21 @@ const AllBooks = (props) => {
 	};
 
 	const onBookPress = (bookName, bookCoverUrl, bookIndex) => {
-		console.log('all book name', bookName);
-		console.log('all book image', bookCoverUrl);
-
 		navigation.navigate('Add Review Form', {
 			bookName: bookName,
 			bookCoverUrl: bookCoverUrl,
 		});
 	};
+
+	useEffect(() => {
+		const getData = async () => {
+			let { data, error } = await supabase.from('Books').select('*');
+
+			setAllBooks(data);
+		};
+
+		getData();
+	}, []);
 
 	return (
 		<>
@@ -106,10 +115,11 @@ const AllBooks = (props) => {
 						</View>
 						<View style={styles.bookLists}>
 							{searchText.length === 0 &&
-								books.books.map((book, index) => (
+								allBooks.length > 0 &&
+								allBooks.map((book, index) => (
 									<Book
-										bookImageUrl={book.bookCoverUrl}
-										bookName={book.bookName}
+										bookImageUrl={book.book_image}
+										bookName={book.book_name}
 										key={index}
 										onPress={onBookPress}
 									/>
@@ -118,8 +128,8 @@ const AllBooks = (props) => {
 							{searchText.length !== 0 &&
 								filteredBookList.map((book, index) => (
 									<Book
-										bookImageUrl={book.bookCoverUrl}
-										bookName={book.bookName}
+										bookImageUrl={book.book_image}
+										bookName={book.book_name}
 										key={index}
 										onPress={onBookPress}
 									/>
