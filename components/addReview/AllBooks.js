@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
-	Image,
 	StyleSheet,
 	View,
-	Alert,
-	Text,
-	TouchableOpacity,
 	ImageBackground,
 	ScrollView,
 	TextInput,
@@ -14,8 +10,7 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 
 import { Gap } from '../utilities/utils';
-import Book from './Book';
-import books from '../../dummy-data/books.json';
+import Book from '../utilities/Book';
 import { supabase } from '../../lib/supabase';
 
 const styles = StyleSheet.create({

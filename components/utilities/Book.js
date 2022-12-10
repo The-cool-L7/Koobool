@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import { Gap } from '../utilities/utils';
+import { Gap } from './utils';
 
 const styles = StyleSheet.create({
 	bookView: {
@@ -22,7 +22,7 @@ const Book = (props) => {
 		<>
 			<TouchableOpacity
 				style={styles.bookView}
-				onPress={() => onPress(bookName, bookImageUrl)}
+				onPress={() => onPress && onPress(bookName, bookImageUrl)}
 			>
 				<Image
 					style={styles.bookImage}

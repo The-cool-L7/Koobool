@@ -1,5 +1,19 @@
 import React from 'react';
-import { Text, StyleSheet, Button, View } from 'react-native';
+import { useState, useEffect } from 'react';
+import {
+	StyleSheet,
+	View,
+	ImageBackground,
+	ScrollView,
+	TextInput,
+	Text,
+} from 'react-native';
+
+import { FontAwesome } from '@expo/vector-icons';
+
+import { supabase } from '../../lib/supabase';
+import { Gap } from '../utilities/utils';
+import Book from '../utilities/Book';
 
 const styles = StyleSheet.create({
 	text: {
@@ -16,14 +30,114 @@ const styles = StyleSheet.create({
 		flexGrow: 1,
 		width: '100%',
 	},
+	imageBackground: {
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	container: {
+		flex: 1,
+		flexGrow: 1,
+		paddingBottom: 10,
+		width: '100%',
+		paddingHorizontal: 10,
+	},
+	title: {},
+	searchInputView: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	searchInput: {
+		height: 40,
+		borderWidth: 1.5,
+		width: '85%',
+		paddingHorizontal: 15,
+		paddingVertical: 13,
+		backgroundColor: '#fff',
+		marginVertical: 20,
+		alignSelf: 'center',
+		borderRadius: 10,
+	},
+	bookLists: {
+		marginTop: 10,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
+	},
 });
 
 const Home = () => {
+	const [searchText, onChangeSearchText] = useState('');
+	const [allBooks, setAllBooks] = useState([]);
+	const [filteredBookList, setFilteredBookList] = useState([]);
+
+	const onSearchInputChange = () => {
+		if (searchText.length !== 0 && allBooks.length > 0) {
+			const filtered = allBooks.filter((b) =>
+				b.book_name.includes(searchText),
+			);
+
+			setFilteredBookList(() => filtered);
+		}
+	};
+
+	useEffect(() => {
+		const getData = async () => {
+			let { data, error } = await supabase.from('Books').select('*');
+
+			setAllBooks(data);
+		};
+
+		getData();
+	}, []);
+
 	return (
 		<>
-			<View style={styles.view}>
-				<Text style={styles.text}>Home</Text>
-			</View>
+			<ScrollView
+				style={{ flex: 1 }}
+				contentContainerStyle={{ flexGrow: 1 }}
+			>
+				<ImageBackground
+					source={require('../../assets/review-page/review-bkg-image-white.png')}
+					resizeMode='cover'
+					style={styles.imageBackground}
+				>
+					<View style={styles.container}>
+						<View style={styles.searchInputView}>
+							<FontAwesome name='search' size={24} color='black' />
+							<Gap size={15} />
+							<TextInput
+								style={styles.searchInput}
+								onChangeText={onChangeSearchText}
+								onChange={onSearchInputChange}
+								value={searchText}
+								placeholder='Search book...'
+							/>
+						</View>
+						<View style={styles.bookLists}>
+							{searchText.length === 0 &&
+								allBooks.length > 0 &&
+								allBooks.map((book, index) => (
+									<Book
+										bookImageUrl={book.book_image}
+										bookName={book.book_name}
+										key={index}
+									/>
+								))}
+
+							{searchText.length !== 0 &&
+								filteredBookList.map((book, index) => (
+									<Book
+										bookImageUrl={book.book_image}
+										bookName={book.book_name}
+										key={index}
+									/>
+								))}
+						</View>
+					</View>
+				</ImageBackground>
+			</ScrollView>
 		</>
 	);
 };
