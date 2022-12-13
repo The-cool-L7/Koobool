@@ -15,6 +15,7 @@ import { Camera } from 'expo-camera';
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
 import { Gap } from '../utilities/utils';
+import { supabase } from '../../lib/supabase';
 
 const styles = StyleSheet.create({
 	imageBackground: {
@@ -76,9 +77,16 @@ const styles = StyleSheet.create({
 const AddReviewForm = (props) => {
 	const { navigation, route } = props;
 
+	const [imageBlob, setImageBlob] = useState(null);
 	const [image, setImage] = useState(null);
 
 	const { bookName, bookCoverUrl } = route.params;
+
+	const fetchImageFromUri = async (uri) => {
+		const response = await fetch(uri);
+		const blob = await response.blob();
+		return blob;
+	};
 
 	const onGalleryButtonPress = async () => {
 		const result = await ImagePicker.launchImageLibraryAsync({
@@ -86,7 +94,12 @@ const AddReviewForm = (props) => {
 			allowsEditing: true,
 		});
 
-		if (!result.canceled) setImage(result.assets[0].uri);
+		if (!result.canceled) {
+			const img = await fetchImageFromUri(result.assets[0].uri);
+
+			setImageBlob(img);
+			setImage(result.assets[0].uri);
+		}
 	};
 
 	const onCameraButtonPress = async () => {
@@ -97,6 +110,9 @@ const AddReviewForm = (props) => {
 				allowsEditing: false,
 			});
 
+			const img = await fetchImageFromUri(result.assets[0].uri);
+
+			setImageBlob(img);
 			setImage(result.assets[0].uri);
 		} else {
 			Alert.alert(
@@ -106,18 +122,57 @@ const AddReviewForm = (props) => {
 		}
 	};
 
-	const onSubmitButtonPress = () => {
-		if (!image) {
-			Alert.alert(
-				'Please take a picture or upload an image to submit a review!',
-			);
+	const getBookId = async (bookName) => {
+		const { data, error } = await supabase
+			.from('Books')
+			.select('id')
+			.eq('book_name', bookName);
 
-			return;
+		return data[0]['id'];
+	};
+
+	const uploadReviewImage = async () => {
+		const { data, error } = await supabase.storage
+			.from('reviewimages')
+			.upload('test.jpg', imageBlob, {
+				// cacheControl: '3600',
+				upsert: true,
+			});
+
+		console.log('upload completed');
+		console.log(error, 'error');
+		return data;
+	};
+
+	const onSubmitButtonPress = async () => {
+		try {
+			if (!image) {
+				Alert.alert(
+					'Please take a picture or upload an image to submit a review!',
+				);
+
+				return;
+			}
+
+			console.log(await getBookId(bookName));
+			console.log(await uploadReviewImage());
+			const bookId = await getBookId(bookName);
+
+			// upload book review
+			// const { data, error } = await supabase.from('Reviews').insert([
+			// 	{ book_id: bookId },
+			// 	{ reviewed_by: 2 }, // hardcoded for now
+			// 	{ review_image: '' },
+			// ]);
+
+			setImage('');
+			Alert.alert('Submitted successfully!');
+
+			navigation.goBack();
+		} catch (err) {
+			console.log(err);
+			Alert.alert('An error occured!');
 		}
-
-		Alert.alert('Submitted successfully!');
-
-		navigation.navigate('Home');
 	};
 
 	return (
