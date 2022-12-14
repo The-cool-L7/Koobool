@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
 	Text,
 	StyleSheet,
@@ -6,6 +6,8 @@ import {
 	ScrollView,
 	ImageBackground,
 	View,
+	RefreshControl,
+	Alert,
 } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -62,23 +64,97 @@ const styles = StyleSheet.create({
 
 const SearchReview = () => {
 	const [searchText, onChangeSearchText] = useState('');
-	const [filteredBookList, setFilteredBookList] = useState([]);
+	const [allBooks, setAllBooks] = useState([]);
+	const [allBookReviews, setAllBookReviews] = useState([]);
+	const [filteredBookReviews, setFilteredBookReviews] = useState([]);
+	const [refreshing, setRefreshing] = useState(false);
 
-	const onSearchInputChange = () => {
-		if (searchText.length !== 0) {
-			const filtered = bookReviews.reviews.filter((b) =>
-				b.bookName.includes(searchText),
-			);
+	const getAllBookReviews = async () => {
+		let { data, error } = await supabase.from('Reviews').select('*');
 
-			setFilteredBookList(() => filtered);
+		setAllBookReviews(data);
+	};
+
+	const getAllBooks = async () => {
+		let { data, error } = await supabase.from('Books').select('*');
+
+		setAllBooks(data);
+	};
+
+	const getBookIdsByName = async (name) => {
+		// const filtered = allBooks.filter((book) => {
+		// 	const bookName = book.book_name.toLowerCase();
+
+		// 	return bookName.includes(name.toLowerCase());
+		// });
+
+		// return filtered;
+
+		const { data, error } = await supabase
+			.from('Books')
+			.select('id')
+			.ilike('book_name', `%${name}%`);
+
+		if (error) throw error;
+
+		console.log(data);
+		return data;
+	};
+
+	const filterBookReviews = async (bookIds) => {
+		const ids = [];
+
+		bookIds.forEach((id) => {
+			ids.push(id.id);
+		});
+
+		console.log(ids);
+
+		const { data, error } = await supabase
+			.from('Reviews')
+			.select('*')
+			.in('book_id', ids);
+
+		if (error) throw error;
+
+		return data;
+	};
+
+	const onSearchInputChange = async () => {
+		try {
+			if (searchText.length !== 0) {
+				const filteredBookIds = await getBookIdsByName(searchText);
+
+				const filteredReviews = await filterBookReviews(filteredBookIds);
+				setFilteredBookReviews(filteredReviews);
+			}
+		} catch (err) {
+			Alert.alert('There was an error while searching!');
 		}
 	};
+
+	const wait = (timeout) => {
+		return new Promise((resolve) => setTimeout(resolve, timeout));
+	};
+
+	const onRefresh = useCallback(() => {
+		setRefreshing(true);
+		wait(1000).then(() => setRefreshing(false));
+	}, []);
+
+	useEffect(() => {
+		getAllBooks();
+		getAllBookReviews();
+	}, []);
 
 	return (
 		<>
 			<ScrollView
 				style={{ flex: 1 }}
 				contentContainerStyle={{ flexGrow: 1 }}
+				refreshControl={
+					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+				}
 			>
 				<ImageBackground
 					source={require('../../assets/search-page/search-bkg-image-white.png')}
@@ -104,14 +180,15 @@ const SearchReview = () => {
 									<ReviewCard
 										username={book.username}
 										bookName={book.bookName}
-										bookCoverSrc={book.bookCoverUrl}
-										drawingSrc={book.drawingSrc}
+										bookCoverSrc={book.book_image}
+										drawingSrc={book.review_image}
 										key={index}
 									/>
 								))}
 
 							{searchText.length !== 0 &&
-								filteredBookList.map((book, index) => (
+								filteredBookReviews.length > 0 &&
+								filteredBookReviews.map((book, index) => (
 									<ReviewCard
 										username={book.username}
 										bookName={book.bookName}

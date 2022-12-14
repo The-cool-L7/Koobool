@@ -161,7 +161,7 @@ const AddReviewForm = (props) => {
 				.from('reviewimages')
 				.getPublicUrl(path);
 
-			return data;
+			return data.publicUrl;
 		} catch (err) {
 			Alert.alert('An error occured!');
 		}

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
 	StyleSheet,
 	View,
@@ -7,6 +6,7 @@ import {
 	ScrollView,
 	TextInput,
 	Text,
+	RefreshControl,
 } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -78,6 +78,7 @@ const Home = () => {
 	const [searchText, onChangeSearchText] = useState('');
 	const [allBooks, setAllBooks] = useState([]);
 	const [filteredBookList, setFilteredBookList] = useState([]);
+	const [refreshing, setRefreshing] = useState(false);
 
 	const onSearchInputChange = () => {
 		if (searchText.length !== 0 && allBooks.length > 0) {
@@ -88,6 +89,15 @@ const Home = () => {
 			setFilteredBookList(() => filtered);
 		}
 	};
+
+	const wait = (timeout) => {
+		return new Promise((resolve) => setTimeout(resolve, timeout));
+	};
+
+	const onRefresh = useCallback(() => {
+		setRefreshing(true);
+		wait(1000).then(() => setRefreshing(false));
+	}, []);
 
 	useEffect(() => {
 		const getData = async () => {
@@ -104,6 +114,9 @@ const Home = () => {
 			<ScrollView
 				style={{ flex: 1 }}
 				contentContainerStyle={{ flexGrow: 1 }}
+				refreshControl={
+					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+				}
 			>
 				<ImageBackground
 					source={require('../../assets/review-page/review-bkg-image-white.png')}
