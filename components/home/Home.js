@@ -94,19 +94,22 @@ const Home = () => {
 		return new Promise((resolve) => setTimeout(resolve, timeout));
 	};
 
+	const getAllBooks = async () => {
+		let { data, error } = await supabase.from('Books').select('*');
+
+		setAllBooks(data);
+	};
+
 	const onRefresh = useCallback(() => {
 		setRefreshing(true);
+
+		getAllBooks();
+
 		wait(1000).then(() => setRefreshing(false));
 	}, []);
 
 	useEffect(() => {
-		const getData = async () => {
-			let { data, error } = await supabase.from('Books').select('*');
-
-			setAllBooks(data);
-		};
-
-		getData();
+		getAllBooks();
 	}, []);
 
 	return (

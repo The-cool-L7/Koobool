@@ -62,34 +62,16 @@ const styles = StyleSheet.create({
 	},
 });
 
-const SearchReview = () => {
+const SearchReview = (props) => {
+	const { navigation } = props;
+
 	const [searchText, onChangeSearchText] = useState('');
 	const [allBooks, setAllBooks] = useState([]);
 	const [allBookReviews, setAllBookReviews] = useState([]);
 	const [filteredBookReviews, setFilteredBookReviews] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
 
-	const getAllBookReviews = async () => {
-		let { data, error } = await supabase.from('Reviews').select('*');
-
-		setAllBookReviews(data);
-	};
-
-	const getAllBooks = async () => {
-		let { data, error } = await supabase.from('Books').select('*');
-
-		setAllBooks(data);
-	};
-
 	const getBookIdsByName = async (name) => {
-		// const filtered = allBooks.filter((book) => {
-		// 	const bookName = book.book_name.toLowerCase();
-
-		// 	return bookName.includes(name.toLowerCase());
-		// });
-
-		// return filtered;
-
 		const { data, error } = await supabase
 			.from('Books')
 			.select('id')
@@ -97,7 +79,6 @@ const SearchReview = () => {
 
 		if (error) throw error;
 
-		console.log(data);
 		return data;
 	};
 
@@ -107,8 +88,6 @@ const SearchReview = () => {
 		bookIds.forEach((id) => {
 			ids.push(id.id);
 		});
-
-		console.log(ids);
 
 		const { data, error } = await supabase
 			.from('Reviews')
@@ -120,13 +99,50 @@ const SearchReview = () => {
 		return data;
 	};
 
+	const getBookNameAndImageById = async (id) => {
+		const { data, error } = await supabase
+			.from('Books')
+			.select('book_name, book_image, id')
+			.eq('id', id);
+
+		// console.log('bookNameAndId', data);
+		return data[0];
+	};
+
+	const getChildNameById = async (id) => {
+		const { data, error } = await supabase
+			.from('Children')
+			.select('name, id')
+			.eq('id', id);
+
+		return data[0].name;
+	};
+
 	const onSearchInputChange = async () => {
 		try {
 			if (searchText.length !== 0) {
 				const filteredBookIds = await getBookIdsByName(searchText);
 
 				const filteredReviews = await filterBookReviews(filteredBookIds);
-				setFilteredBookReviews(filteredReviews);
+
+				const final = [];
+
+				filteredReviews.forEach(async (r, i) => {
+					final[i] = {
+						username: await getChildNameById(r.reviewed_by),
+						bookName: await getBookNameAndImageById(r.book_id).book_name,
+						bookCoverSrc: await getBookNameAndImageById(r.book_id)
+							.book_image,
+						drawingSrc: r.review_image,
+					};
+				});
+
+				setFilteredBookReviews(final);
+
+				// console.log('reviews', filteredReviews);
+				// console.log('filteredBookReviews', filteredBookReviews);
+
+				return final;
 			}
 		} catch (err) {
 			Alert.alert('There was an error while searching!');
@@ -139,11 +155,33 @@ const SearchReview = () => {
 
 	const onRefresh = useCallback(() => {
 		setRefreshing(true);
+
+		getAllBookReviews();
+
 		wait(1000).then(() => setRefreshing(false));
 	}, []);
 
+	const getAllBookReviews = async () => {
+		let { data, error } = await supabase.from('Reviews').select('*');
+
+		const final = [];
+
+		data.forEach(async (r, i) => {
+			final[i] = {
+				username: await getChildNameById(r.reviewed_by),
+				bookName: await getBookNameAndImageById(r.book_id).book_name,
+				bookName: await getBookNameAndImageById(r.book_id).book_name,
+
+				bookCoverSrc: await getBookNameAndImageById(r.book_id).book_image,
+
+				drawingSrc: r.review_image,
+			};
+		});
+
+		setAllBookReviews(final);
+	};
+
 	useEffect(() => {
-		getAllBooks();
 		getAllBookReviews();
 	}, []);
 
@@ -176,26 +214,46 @@ const SearchReview = () => {
 						<Text style={styles.recentReviewsText}>Recent reviews</Text>
 						<View style={styles.reviewCards}>
 							{searchText.length === 0 &&
-								bookReviews.reviews.map((book, index) => (
+								allBookReviews.length > 0 &&
+								allBookReviews.map((r, index) => (
 									<ReviewCard
-										username={book.username}
-										bookName={book.bookName}
-										bookCoverSrc={book.book_image}
-										drawingSrc={book.review_image}
+										username={r.username}
+										bookName={r.bookName}
+										bookCoverSrc={r.bookCoverStc}
+										drawingSrc={r.drawingSrc}
 										key={index}
 									/>
+									// <ReviewCard
+									// 	username={'book.username'}
+									// 	bookName={'book.bookName'}
+									// 	bookCoverSrc={
+									// 		'https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-50807a86-6e8c-4735-8a1d-a2feafbe4a68.jpg'
+									// 	}
+									// 	drawingSrc={review.review_image}
+									// 	key={index}
+									// />
 								))}
 
 							{searchText.length !== 0 &&
-								filteredBookReviews.length > 0 &&
-								filteredBookReviews.map((book, index) => (
+								filteredBookReviews.map((r, index) => (
 									<ReviewCard
-										username={book.username}
-										bookName={book.bookName}
-										bookCoverSrc={book.bookCoverUrl}
-										drawingSrc={book.drawingSrc}
+										username={r.username}
+										bookName={r.bookName}
+										bookCoverSrc={r.bookCoverStc}
+										drawingSrc={r.drawingSrc}
 										key={index}
 									/>
+									// <ReviewCard
+									// 	username={'hello'}
+									// 	bookName={'h'}
+									// 	bookCoverSrc={
+									// 		'https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-50807a86-6e8c-4735-8a1d-a2feafbe4a68.jpg'
+									// 	}
+									// 	drawingSrc={
+									// 		'https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-50807a86-6e8c-4735-8a1d-a2feafbe4a68.jpg'
+									// 	}
+									// 	key={index}
+									// />
 								))}
 						</View>
 					</View>
