@@ -10,11 +10,16 @@ import {
 const styles = StyleSheet.create({
 	button: {
 		alignItems: 'center',
+		width: 'auto',
 	},
 	text: {
 		fontSize: 15,
-		textAlign: 'center',
 		marginTop: 10,
+		textAlign: 'center',
+		alignItems: 'center',
+		justifyContent: 'center',
+
+		// maxWidth: 72,
 	},
 	iconView: {
 		backgroundColor: '#fff',
@@ -22,6 +27,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderColor: '#000',
 		borderWidth: 3,
+		alignItems: 'center',
 	},
 	icon: {
 		width: 40,

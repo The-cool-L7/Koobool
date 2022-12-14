@@ -9,8 +9,11 @@ import {
 	ImageBackground,
 	ScrollView,
 } from 'react-native';
+
+import { decode } from 'base64-arraybuffer';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
+import uuid from 'react-native-uuid';
 
 import BookInfo from './BookInfo';
 import ReviewButton from './ReviewButton';
@@ -77,28 +80,25 @@ const styles = StyleSheet.create({
 const AddReviewForm = (props) => {
 	const { navigation, route } = props;
 
-	const [imageBlob, setImageBlob] = useState(null);
+	const [imageBase64, setImageBase64] = useState(null);
 	const [image, setImage] = useState(null);
 
 	const { bookName, bookCoverUrl } = route.params;
-
-	const fetchImageFromUri = async (uri) => {
-		const response = await fetch(uri);
-		const blob = await response.blob();
-		return blob;
-	};
 
 	const onGalleryButtonPress = async () => {
 		const result = await ImagePicker.launchImageLibraryAsync({
 			aspect: [3, 3],
 			allowsEditing: true,
+			base64: true,
 		});
 
 		if (!result.canceled) {
-			const img = await fetchImageFromUri(result.assets[0].uri);
-
-			setImageBlob(img);
+			setImageBase64(result.assets[0].base64);
 			setImage(result.assets[0].uri);
+		} else {
+			Alert.alert('Error', 'Please try again!');
+
+			return;
 		}
 	};
 
@@ -107,12 +107,17 @@ const AddReviewForm = (props) => {
 
 		if (status === 'granted') {
 			const result = await ImagePicker.launchCameraAsync({
-				allowsEditing: false,
+				allowsEditing: true,
+				base64: true,
 			});
 
-			const img = await fetchImageFromUri(result.assets[0].uri);
+			if (result.canceled || !result.assets[0].base64) {
+				Alert.alert('Error', 'Please try again!');
 
-			setImageBlob(img);
+				return;
+			}
+
+			setImageBase64(result.assets[0].base64);
 			setImage(result.assets[0].uri);
 		} else {
 			Alert.alert(
@@ -132,16 +137,34 @@ const AddReviewForm = (props) => {
 	};
 
 	const uploadReviewImage = async () => {
-		const { data, error } = await supabase.storage
-			.from('reviewimages')
-			.upload('test.jpg', imageBlob, {
-				// cacheControl: '3600',
-				upsert: true,
-			});
+		try {
+			const extension = image.split('.').pop();
 
-		console.log('upload completed');
-		console.log(error, 'error');
-		return data;
+			const { data, error } = await supabase.storage
+				.from('reviewimages')
+				.upload(`review-${uuid.v4()}.${extension}`, decode(imageBase64), {
+					// cacheControl: '3600',
+					upsert: true,
+				});
+
+			if (error) throw error;
+
+			return data.path;
+		} catch (err) {
+			Alert.alert('An error occured!');
+		}
+	};
+
+	const getReviewImageUrl = async (path) => {
+		try {
+			const { data } = supabase.storage
+				.from('reviewimages')
+				.getPublicUrl(path);
+
+			return data;
+		} catch (err) {
+			Alert.alert('An error occured!');
+		}
 	};
 
 	const onSubmitButtonPress = async () => {
@@ -154,18 +177,24 @@ const AddReviewForm = (props) => {
 				return;
 			}
 
-			console.log(await getBookId(bookName));
-			console.log(await uploadReviewImage());
 			const bookId = await getBookId(bookName);
+			const reviewImagePath = await uploadReviewImage();
+			const reviewImageUrl = await getReviewImageUrl(reviewImagePath);
 
 			// upload book review
-			// const { data, error } = await supabase.from('Reviews').insert([
-			// 	{ book_id: bookId },
-			// 	{ reviewed_by: 2 }, // hardcoded for now
-			// 	{ review_image: '' },
-			// ]);
+			const { data, error } = await supabase.from('Reviews').insert([
+				{
+					book_id: bookId,
+					reviewed_by: 2, //hardcoded for now
+					review_image: reviewImageUrl,
+				},
+			]);
 
+			setImageBase64('');
 			setImage('');
+
+			if (error) throw error;
+
 			Alert.alert('Submitted successfully!');
 
 			navigation.goBack();
@@ -209,7 +238,7 @@ const AddReviewForm = (props) => {
 							<Gap size={70} />
 							<ReviewButton
 								onPress={onGalleryButtonPress}
-								buttonText='Gallery'
+								buttonText='My photos'
 							/>
 						</View>
 
