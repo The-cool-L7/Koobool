@@ -13,6 +13,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import ReviewCard from './ReviewCard';
 import bookReviews from '../../dummy-data/bookReviews.json';
 import { Gap } from '../utilities/utils';
+import { supabase } from '../../lib/supabase';
 
 const styles = StyleSheet.create({
 	scrollView: {
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
 		marginBottom: 5,
 		fontWeight: 'bold',
 		fontSize: 22,
+		textAlign: 'center',
 	},
 	reviewCards: {
 		alignItems: 'center',
@@ -95,7 +97,7 @@ const SearchReview = () => {
 								placeholder='Search book...'
 							/>
 						</View>
-						<Text style={styles.recentReviewsText}>Recent reviews:</Text>
+						<Text style={styles.recentReviewsText}>Recent reviews</Text>
 						<View style={styles.reviewCards}>
 							{searchText.length === 0 &&
 								bookReviews.reviews.map((book, index) => (

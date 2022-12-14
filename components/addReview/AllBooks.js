@@ -5,6 +5,7 @@ import {
 	ImageBackground,
 	ScrollView,
 	TextInput,
+	Text,
 } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
@@ -48,6 +49,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		justifyContent: 'center',
+	},
+	allBooksText: {
+		marginVertical: 20,
+		marginBottom: 5,
+		fontWeight: 'bold',
+		fontSize: 22,
+		textAlign: 'center',
 	},
 });
 
@@ -108,6 +116,9 @@ const AllBooks = (props) => {
 								placeholder='Search book...'
 							/>
 						</View>
+						<Text style={styles.allBooksText}>
+							Select a book to add review
+						</Text>
 						<View style={styles.bookLists}>
 							{searchText.length === 0 &&
 								allBooks.length > 0 &&

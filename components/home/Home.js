@@ -65,6 +65,13 @@ const styles = StyleSheet.create({
 		flexWrap: 'wrap',
 		justifyContent: 'center',
 	},
+	homePageText: {
+		marginVertical: 20,
+		marginBottom: 5,
+		fontWeight: 'bold',
+		fontSize: 22,
+		textAlign: 'center',
+	},
 });
 
 const Home = () => {
@@ -115,6 +122,7 @@ const Home = () => {
 								placeholder='Search book...'
 							/>
 						</View>
+						<Text style={styles.homePageText}>All books</Text>
 						<View style={styles.bookLists}>
 							{searchText.length === 0 &&
 								allBooks.length > 0 &&
