@@ -162,23 +162,30 @@ const SearchReview = (props) => {
 	}, []);
 
 	const getAllBookReviews = async () => {
-		let { data, error } = await supabase.from('Reviews').select('*');
+		try {
+			let { data, error } = await supabase.from('Reviews').select('*');
 
-		const final = [];
+			const final = [];
 
-		data.forEach(async (r, i) => {
-			final[i] = {
-				username: await getChildNameById(r.reviewed_by),
-				bookName: await getBookNameAndImageById(r.book_id).book_name,
-				bookName: await getBookNameAndImageById(r.book_id).book_name,
+			data.forEach(async (r, i) => {
+				final[i] = {
+					username: await getChildNameById(r.reviewed_by),
+					bookName: await getBookNameAndImageById(r.book_id).book_name,
+					bookName: await getBookNameAndImageById(r.book_id).book_name,
 
-				bookCoverSrc: await getBookNameAndImageById(r.book_id).book_image,
+					bookCoverSrc: await getBookNameAndImageById(r.book_id)
+						.book_image,
 
-				drawingSrc: r.review_image,
-			};
-		});
+					drawingSrc: r.review_image,
+				};
+			});
 
-		setAllBookReviews(final);
+			if (error) throw error;
+
+			setAllBookReviews(final);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	useEffect(() => {
