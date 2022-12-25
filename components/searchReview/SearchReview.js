@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	searchInput: {
-		height: 40,
+		height: 50,
 		borderWidth: 1.5,
 		width: '85%',
 		paddingHorizontal: 15,
@@ -118,6 +118,8 @@ const SearchReview = (props) => {
 			.select('name, id')
 			.eq('id', id);
 
+		if (error) throw error;
+
 		return data[0].name;
 	};
 
@@ -128,23 +130,29 @@ const SearchReview = (props) => {
 
 				const filteredReviews = await filterBookReviews(filteredBookIds);
 
+				console.log(filteredReviews);
+
 				const final = [];
 
-				filteredReviews.forEach(async (r, i) => {
-					final[i] = {
+				for (const r in filteredReviews) {
+					final.push({
 						username: await getChildNameById(r.reviewed_by),
-						bookName: await getBookNameAndImageById(r.book_id).book_name,
-						bookCoverSrc: await getBookNameAndImageById(r.book_id)
-							.book_image,
+						bookName: await getBookNameAndImageById(
+							r.book_id,
+							'BOOK_NAME',
+						),
+						bookCoverSrc: await getBookNameAndImageById(
+							r.book_id,
+							'BOOK_IMAGE',
+						),
 						drawingSrc: r.review_image,
-					};
-				});
+					});
+				}
 
 				setFilteredBookReviews(final);
-
-				return final;
 			}
 		} catch (err) {
+			console.log(err);
 			Alert.alert('There was an error while searching!');
 		}
 	};
@@ -175,12 +183,9 @@ const SearchReview = (props) => {
 						r.book_id,
 						'BOOK_IMAGE',
 					),
-
 					drawingSrc: r.review_image,
 				});
 			}
-
-			console.log('final', final);
 
 			if (error) throw error;
 

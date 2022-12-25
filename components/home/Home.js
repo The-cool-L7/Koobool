@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	searchInput: {
-		height: 40,
+		height: 50,
 		borderWidth: 1.5,
 		width: '85%',
 		paddingHorizontal: 15,
