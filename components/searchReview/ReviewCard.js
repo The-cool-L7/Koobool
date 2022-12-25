@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 	},
 	bookCoverImage: {
 		width: 120,
-		height: 120,
+		height: 160,
 	},
 	drawingImage: {
 		width: '100%',
@@ -26,7 +26,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	bottom: { flexDirection: 'row', marginTop: 20 },
-	topLeft: {},
+	topLeft: {
+		alignSelf: 'flex-start',
+	},
 	topLeftTop: {},
 	topLeftBottom: {
 		marginTop: 10,
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
 	},
 	bookName: {
 		fontWeight: 'bold',
-		fontSize: 18,
+		fontSize: 23,
 		maxWidth: 120,
 	},
 });

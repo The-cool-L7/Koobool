@@ -99,14 +99,17 @@ const SearchReview = (props) => {
 		return data;
 	};
 
-	const getBookNameAndImageById = async (id) => {
+	const getBookNameAndImageById = async (id, returnData) => {
 		const { data, error } = await supabase
 			.from('Books')
 			.select('book_name, book_image, id')
 			.eq('id', id);
 
-		// console.log('bookNameAndId', data);
-		return data[0];
+		if (returnData === 'BOOK_NAME') {
+			return data[0].book_name;
+		} else if (returnData === 'BOOK_IMAGE') {
+			return data[0].book_image;
+		}
 	};
 
 	const getChildNameById = async (id) => {
@@ -139,9 +142,6 @@ const SearchReview = (props) => {
 
 				setFilteredBookReviews(final);
 
-				// console.log('reviews', filteredReviews);
-				// console.log('filteredBookReviews', filteredBookReviews);
-
 				return final;
 			}
 		} catch (err) {
@@ -167,18 +167,20 @@ const SearchReview = (props) => {
 
 			const final = [];
 
-			data.forEach(async (r, i) => {
-				final[i] = {
+			for (const r of data) {
+				final.push({
 					username: await getChildNameById(r.reviewed_by),
-					bookName: await getBookNameAndImageById(r.book_id).book_name,
-					bookName: await getBookNameAndImageById(r.book_id).book_name,
-
-					bookCoverSrc: await getBookNameAndImageById(r.book_id)
-						.book_image,
+					bookName: await getBookNameAndImageById(r.book_id, 'BOOK_NAME'),
+					bookCoverSrc: await getBookNameAndImageById(
+						r.book_id,
+						'BOOK_IMAGE',
+					),
 
 					drawingSrc: r.review_image,
-				};
-			});
+				});
+			}
+
+			console.log('final', final);
 
 			if (error) throw error;
 
@@ -226,7 +228,7 @@ const SearchReview = (props) => {
 									<ReviewCard
 										username={r.username}
 										bookName={r.bookName}
-										bookCoverSrc={r.bookCoverStc}
+										bookCoverSrc={r.bookCoverSrc}
 										drawingSrc={r.drawingSrc}
 										key={index}
 									/>
