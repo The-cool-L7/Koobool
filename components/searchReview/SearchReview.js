@@ -105,6 +105,8 @@ const SearchReview = (props) => {
 			.select('book_name, book_image, id')
 			.eq('id', id);
 
+		if (error) throw error;
+
 		if (returnData === 'BOOK_NAME') {
 			return data[0].book_name;
 		} else if (returnData === 'BOOK_IMAGE') {
@@ -130,11 +132,9 @@ const SearchReview = (props) => {
 
 				const filteredReviews = await filterBookReviews(filteredBookIds);
 
-				console.log(filteredReviews);
-
 				const final = [];
 
-				for (const r in filteredReviews) {
+				for (const r of filteredReviews) {
 					final.push({
 						username: await getChildNameById(r.reviewed_by),
 						bookName: await getBookNameAndImageById(
@@ -237,15 +237,6 @@ const SearchReview = (props) => {
 										drawingSrc={r.drawingSrc}
 										key={index}
 									/>
-									// <ReviewCard
-									// 	username={'book.username'}
-									// 	bookName={'book.bookName'}
-									// 	bookCoverSrc={
-									// 		'https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-50807a86-6e8c-4735-8a1d-a2feafbe4a68.jpg'
-									// 	}
-									// 	drawingSrc={review.review_image}
-									// 	key={index}
-									// />
 								))}
 
 							{searchText.length !== 0 &&
@@ -253,21 +244,10 @@ const SearchReview = (props) => {
 									<ReviewCard
 										username={r.username}
 										bookName={r.bookName}
-										bookCoverSrc={r.bookCoverStc}
+										bookCoverSrc={r.bookCoverSrc}
 										drawingSrc={r.drawingSrc}
 										key={index}
 									/>
-									// <ReviewCard
-									// 	username={'hello'}
-									// 	bookName={'h'}
-									// 	bookCoverSrc={
-									// 		'https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-50807a86-6e8c-4735-8a1d-a2feafbe4a68.jpg'
-									// 	}
-									// 	drawingSrc={
-									// 		'https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-50807a86-6e8c-4735-8a1d-a2feafbe4a68.jpg'
-									// 	}
-									// 	key={index}
-									// />
 								))}
 						</View>
 					</View>
