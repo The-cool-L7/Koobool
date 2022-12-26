@@ -13,7 +13,6 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 
 import ReviewCard from './ReviewCard';
-import bookReviews from '../../dummy-data/bookReviews.json';
 import { Gap } from '../utilities/utils';
 import { supabase } from '../../lib/supabase';
 
@@ -66,7 +65,6 @@ const SearchReview = (props) => {
 	const { navigation } = props;
 
 	const [searchText, onChangeSearchText] = useState('');
-	const [allBooks, setAllBooks] = useState([]);
 	const [allBookReviews, setAllBookReviews] = useState([]);
 	const [filteredBookReviews, setFilteredBookReviews] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
@@ -76,6 +74,7 @@ const SearchReview = (props) => {
 			.from('Books')
 			.select('id')
 			.ilike('book_name', `%${name}%`);
+		// .textSearch('book_name', name);
 
 		if (error) throw error;
 
