@@ -80,13 +80,13 @@ const Home = () => {
 	const [filteredBookList, setFilteredBookList] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
 
-	const onSearchInputChange = () => {
-		if (searchText.length !== 0 && allBooks.length > 0) {
-			const filtered = allBooks.filter((b) =>
-				b.book_name.includes(searchText),
-			);
+	const onSearchInputChange = (text) => {
+		if (text.length !== 0 && allBooks.length > 0) {
+			const filtered = allBooks.filter((b) => b.book_name.includes(text));
 
 			setFilteredBookList(() => filtered);
+		} else {
+			setFilteredBookList([]);
 		}
 	};
 
@@ -132,15 +132,13 @@ const Home = () => {
 							<Gap size={15} />
 							<TextInput
 								style={styles.searchInput}
-								onChangeText={onChangeSearchText}
-								onChange={onSearchInputChange}
-								value={searchText}
+								onChangeText={onSearchInputChange}
 								placeholder='Search book...'
 							/>
 						</View>
 						<Text style={styles.homePageText}>All books</Text>
 						<View style={styles.bookLists}>
-							{searchText.length === 0 &&
+							{filteredBookList.length === 0 &&
 								allBooks.length > 0 &&
 								allBooks.map((book, index) => (
 									<Book
@@ -150,7 +148,7 @@ const Home = () => {
 									/>
 								))}
 
-							{searchText.length !== 0 &&
+							{filteredBookList.length !== 0 &&
 								filteredBookList.map((book, index) => (
 									<Book
 										bookImageUrl={book.book_image}

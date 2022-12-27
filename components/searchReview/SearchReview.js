@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
 const SearchReview = (props) => {
 	const { navigation } = props;
 
-	const [searchText, onChangeSearchText] = useState('');
 	const [allBookReviews, setAllBookReviews] = useState([]);
 	const [filteredBookReviews, setFilteredBookReviews] = useState([]);
 	const [refreshing, setRefreshing] = useState(false);
@@ -124,10 +123,12 @@ const SearchReview = (props) => {
 		return data[0].name;
 	};
 
-	const onSearchInputChange = async () => {
+	const onSearchInputChange = async (text) => {
+		console.log(text);
 		try {
-			if (searchText.length !== 0) {
-				const filteredBookIds = await getBookIdsByName(searchText);
+			if (text.length !== 0) {
+				console.log('hello');
+				const filteredBookIds = await getBookIdsByName(text);
 
 				const filteredReviews = await filterBookReviews(filteredBookIds);
 
@@ -149,6 +150,8 @@ const SearchReview = (props) => {
 				}
 
 				setFilteredBookReviews(final);
+			} else {
+				setFilteredBookReviews([]);
 			}
 		} catch (err) {
 			console.log(err);
@@ -218,15 +221,13 @@ const SearchReview = (props) => {
 							<Gap size={15} />
 							<TextInput
 								style={styles.searchInput}
-								onChangeText={onChangeSearchText}
-								onChange={onSearchInputChange}
-								value={searchText}
+								onChangeText={onSearchInputChange}
 								placeholder='Search book...'
 							/>
 						</View>
 						<Text style={styles.recentReviewsText}>Recent reviews</Text>
 						<View style={styles.reviewCards}>
-							{searchText.length === 0 &&
+							{filteredBookReviews.length === 0 &&
 								allBookReviews.length > 0 &&
 								allBookReviews.map((r, index) => (
 									<ReviewCard
@@ -238,7 +239,7 @@ const SearchReview = (props) => {
 									/>
 								))}
 
-							{searchText.length !== 0 &&
+							{filteredBookReviews.length !== 0 &&
 								filteredBookReviews.map((r, index) => (
 									<ReviewCard
 										username={r.username}

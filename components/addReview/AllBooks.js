@@ -62,17 +62,16 @@ const styles = StyleSheet.create({
 const AllBooks = (props) => {
 	const { navigation } = props;
 
-	const [searchText, onChangeSearchText] = useState('');
 	const [allBooks, setAllBooks] = useState([]);
 	const [filteredBookList, setFilteredBookList] = useState([]);
 
-	const onSearchInputChange = () => {
-		if (searchText.length !== 0 && allBooks.length > 0) {
-			const filtered = allBooks.filter((b) =>
-				b.book_name.includes(searchText),
-			);
+	const onSearchInputChange = (text) => {
+		if (text.length !== 0 && allBooks.length > 0) {
+			const filtered = allBooks.filter((b) => b.book_name.includes(text));
 
 			setFilteredBookList(() => filtered);
+		} else {
+			setFilteredBookList([]);
 		}
 	};
 
@@ -110,9 +109,7 @@ const AllBooks = (props) => {
 							<Gap size={15} />
 							<TextInput
 								style={styles.searchInput}
-								onChangeText={onChangeSearchText}
-								onChange={onSearchInputChange}
-								value={searchText}
+								onChangeText={onSearchInputChange}
 								placeholder='Search book...'
 							/>
 						</View>
@@ -120,7 +117,7 @@ const AllBooks = (props) => {
 							Select a book to add review
 						</Text>
 						<View style={styles.bookLists}>
-							{searchText.length === 0 &&
+							{filteredBookList.length === 0 &&
 								allBooks.length > 0 &&
 								allBooks.map((book, index) => (
 									<Book
@@ -131,7 +128,7 @@ const AllBooks = (props) => {
 									/>
 								))}
 
-							{searchText.length !== 0 &&
+							{filteredBookList.length !== 0 &&
 								filteredBookList.map((book, index) => (
 									<Book
 										bookImageUrl={book.book_image}
