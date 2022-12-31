@@ -1,8 +1,11 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -12,8 +15,11 @@ import Home from './components/home/Home';
 import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
 import AddReviewHome from './components/addReview/AddReviewHome';
+import MyReviews from './components/myReviews/MyReviews';
+import HomeTab from './components/home/HomeTab';
 
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
 	return (
@@ -24,13 +30,13 @@ export default function App() {
 
 			<Layout>
 				<NavigationContainer>
-					<Navbar />
-					<Tab.Navigator initialRouteName='Home'>
+					{/* <Navbar /> */}
+					{/* <Tab.Navigator initialRouteName='Home'>
 						<Tab.Screen
 							name='Home'
 							component={Home}
 							options={{
-								headerShown: false,
+								// headerShown: false,
 								tabBarIcon: ({ focused }) => {
 									return (
 										<Entypo
@@ -46,7 +52,7 @@ export default function App() {
 							name='Search Reviews'
 							component={SearchReview}
 							options={{
-								headerShown: false,
+								// headerShown: false,
 								title: 'Search Reviews',
 								tabBarIcon: ({ focused }) => {
 									return (
@@ -63,7 +69,7 @@ export default function App() {
 							name='Add Review Home'
 							component={AddReviewHome}
 							options={{
-								headerShown: false,
+								// headerShown: false,
 								title: 'Add Review',
 								tabBarIcon: ({ focused }) => {
 									return (
@@ -76,7 +82,24 @@ export default function App() {
 								},
 							}}
 						/>
-					</Tab.Navigator>
+					</Tab.Navigator> */}
+					<Drawer.Navigator
+						screenOptions={{
+							drawerActiveTintColor: '#e91e65',
+							drawerItemStyle: { marginVertical: 5 },
+						}}
+					>
+						<Drawer.Screen
+							name='Home Tab'
+							options={{ drawerLabel: 'Home' }}
+							component={HomeTab}
+						/>
+						<Drawer.Screen
+							name='My Reviews'
+							options={{ drawerLabel: 'My Reviews' }}
+							component={MyReviews}
+						/>
+					</Drawer.Navigator>
 				</NavigationContainer>
 			</Layout>
 		</>
