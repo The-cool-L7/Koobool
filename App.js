@@ -1,21 +1,27 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useState } from 'react';
 import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-import { NavigationContainer } from '@react-navigation/native';
+import {
+	NavigationContainer,
+	createNavigationContainerRef,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Layout } from './components/utilities/utils';
 import MyReviews from './components/myReviews/MyReviews';
-
 import HomeTab from './components/home/HomeTab';
 
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
+export const navigationRef = createNavigationContainerRef();
+
 export default function App() {
+	const [routeName, setRouteName] = useState();
+
 	return (
 		<>
 			{Platform.OS === 'ios' && (
@@ -23,7 +29,18 @@ export default function App() {
 			)}
 
 			<Layout>
-				<NavigationContainer>
+				<NavigationContainer
+					ref={navigationRef}
+					onReady={() => {
+						setRouteName(navigationRef.getCurrentRoute().name);
+					}}
+					onStateChange={async () => {
+						const previousRouteName = routeName;
+						const currentRouteName = navigationRef.getCurrentRoute().name;
+						// console.log('route', currentRouteName);
+						setRouteName(currentRouteName);
+					}}
+				>
 					<Drawer.Navigator
 						screenOptions={{
 							drawerActiveTintColor: '#e91e65',
@@ -33,8 +50,9 @@ export default function App() {
 						<Drawer.Screen
 							name='Home Tab'
 							options={{ drawerLabel: 'Home', headerShown: false }}
-							component={HomeTab}
-						/>
+						>
+							{(props) => <HomeTab {...props} routeName={routeName} />}
+						</Drawer.Screen>
 						<Drawer.Screen
 							name='My Reviews'
 							options={{ drawerLabel: 'My Reviews', headerShown: false }}

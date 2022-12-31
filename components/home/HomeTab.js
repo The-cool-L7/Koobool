@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
-import { useRoute } from '@react-navigation/native';
 
 import Home from './Home';
 import SearchReview from '../searchReview/SearchReview';
@@ -10,12 +9,9 @@ import AddReviewHome from '../addReview/AddReviewHome';
 import NavigationDrawerStructure from '../NavigationDrawerStructure/NavigationDrawerStructure';
 
 const HomeTab = (props) => {
-	const { navigation } = props;
+	const { navigation, routeName } = props;
 
-	const route = useRoute();
 	const Tab = createBottomTabNavigator();
-
-	console.log(route);
 
 	return (
 		<>
@@ -61,7 +57,7 @@ const HomeTab = (props) => {
 					name='Add Review Home'
 					component={AddReviewHome}
 					options={{
-						// headerShown: false,
+						headerShown: routeName === 'Add Review Form' ? false : true,
 						headerLeft: () => (
 							<NavigationDrawerStructure navigationProps={navigation} />
 						),
