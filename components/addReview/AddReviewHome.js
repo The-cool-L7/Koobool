@@ -5,7 +5,7 @@ import AllBooks from './AllBooks';
 
 const Stack = createNativeStackNavigator();
 
-const AddReviewHome = () => {
+const AddReviewHome = (props) => {
 	return (
 		<>
 			<Stack.Navigator>

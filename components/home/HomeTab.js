@@ -2,13 +2,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { useRoute } from '@react-navigation/native';
 
 import Home from './Home';
 import SearchReview from '../searchReview/SearchReview';
 import AddReviewHome from '../addReview/AddReviewHome';
+import NavigationDrawerStructure from '../NavigationDrawerStructure/NavigationDrawerStructure';
 
-const HomeTab = () => {
+const HomeTab = (props) => {
+	const { navigation } = props;
+
+	const route = useRoute();
 	const Tab = createBottomTabNavigator();
+
+	console.log(route);
 
 	return (
 		<>
@@ -17,7 +24,9 @@ const HomeTab = () => {
 					name='Home'
 					component={Home}
 					options={{
-						// headerShown: false,
+						headerLeft: () => (
+							<NavigationDrawerStructure navigationProps={navigation} />
+						),
 						tabBarIcon: ({ focused }) => {
 							return (
 								<Entypo
@@ -33,7 +42,9 @@ const HomeTab = () => {
 					name='Search Reviews'
 					component={SearchReview}
 					options={{
-						// headerShown: false,
+						headerLeft: () => (
+							<NavigationDrawerStructure navigationProps={navigation} />
+						),
 						title: 'Search Reviews',
 						tabBarIcon: ({ focused }) => {
 							return (
@@ -51,6 +62,9 @@ const HomeTab = () => {
 					component={AddReviewHome}
 					options={{
 						// headerShown: false,
+						headerLeft: () => (
+							<NavigationDrawerStructure navigationProps={navigation} />
+						),
 						title: 'Add Review',
 						tabBarIcon: ({ focused }) => {
 							return (
