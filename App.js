@@ -6,15 +6,8 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Entypo } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
 
-import Navbar from './components/navbar/Navbar';
-import Home from './components/home/Home';
-import SearchReview from './components/searchReview/SearchReview';
 import { Layout } from './components/utilities/utils';
-import AddReviewHome from './components/addReview/AddReviewHome';
 import MyReviews from './components/myReviews/MyReviews';
 import HomeTab from './components/home/HomeTab';
 
@@ -30,59 +23,6 @@ export default function App() {
 
 			<Layout>
 				<NavigationContainer>
-					{/* <Navbar /> */}
-					{/* <Tab.Navigator initialRouteName='Home'>
-						<Tab.Screen
-							name='Home'
-							component={Home}
-							options={{
-								// headerShown: false,
-								tabBarIcon: ({ focused }) => {
-									return (
-										<Entypo
-											name='home'
-											size={24}
-											color={focused ? '#0093E9' : 'black'}
-										/>
-									);
-								},
-							}}
-						/>
-						<Tab.Screen
-							name='Search Reviews'
-							component={SearchReview}
-							options={{
-								// headerShown: false,
-								title: 'Search Reviews',
-								tabBarIcon: ({ focused }) => {
-									return (
-										<FontAwesome
-											name='search'
-											size={24}
-											color={focused ? '#0093E9' : 'black'}
-										/>
-									);
-								},
-							}}
-						/>
-						<Tab.Screen
-							name='Add Review Home'
-							component={AddReviewHome}
-							options={{
-								// headerShown: false,
-								title: 'Add Review',
-								tabBarIcon: ({ focused }) => {
-									return (
-										<MaterialIcons
-											name='rate-review'
-											size={24}
-											color={focused ? '#0093E9' : 'black'}
-										/>
-									);
-								},
-							}}
-						/>
-					</Tab.Navigator> */}
 					<Drawer.Navigator
 						screenOptions={{
 							drawerActiveTintColor: '#e91e65',
@@ -91,12 +31,12 @@ export default function App() {
 					>
 						<Drawer.Screen
 							name='Home Tab'
-							options={{ drawerLabel: 'Home' }}
+							options={{ drawerLabel: 'Home', headerShown: false }}
 							component={HomeTab}
 						/>
 						<Drawer.Screen
 							name='My Reviews'
-							options={{ drawerLabel: 'My Reviews' }}
+							options={{ drawerLabel: 'My Reviews', headerShown: false }}
 							component={MyReviews}
 						/>
 					</Drawer.Navigator>
