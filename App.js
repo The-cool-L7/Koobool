@@ -7,14 +7,13 @@ import {
 	NavigationContainer,
 	createNavigationContainerRef,
 } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Layout } from './components/utilities/utils';
 import MyReviews from './components/myReviews/MyReviews';
 import HomeTab from './components/home/HomeTab';
+import CustomSidebarMenu from './components/sidebarMenu/CustomSidebarMenu';
 
-const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
 export const navigationRef = createNavigationContainerRef();
@@ -46,6 +45,9 @@ export default function App() {
 							drawerActiveTintColor: '#e91e65',
 							drawerItemStyle: { marginVertical: 5 },
 						}}
+						drawerContent={(props) => (
+							<CustomSidebarMenu username='Daniyal' {...props} />
+						)}
 					>
 						<Drawer.Screen
 							name='Home Tab'
