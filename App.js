@@ -42,7 +42,7 @@ export default function App() {
 				>
 					<Drawer.Navigator
 						screenOptions={{
-							drawerActiveTintColor: '#e91e65',
+							drawerActiveTintColor: '#0093E9',
 							drawerItemStyle: { marginVertical: 5 },
 						}}
 						drawerContent={(props) => (

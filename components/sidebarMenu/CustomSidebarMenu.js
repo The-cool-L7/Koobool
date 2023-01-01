@@ -8,9 +8,14 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
+	top: {
+		alignItems: 'center',
+	},
 	username: {
 		fontSize: 20,
 		fontWeight: 'bold',
+		marginTop: 10,
+		// color: '#000',
 	},
 });
 
@@ -19,10 +24,12 @@ const CustomSidebarMenu = (props) => {
 
 	return (
 		<>
-			<SafeAreaView style={{ flex: 1 }}>
-				<FontAwesome name='user-circle-o' size={24} color='black' />
-				<Text style={styles.username}>{username}</Text>
-				<DrawerContentScrollView {...props}>
+			<SafeAreaView style={{ flex: 1, paddingVertical: 30 }}>
+				<View style={styles.top}>
+					<FontAwesome name='user-circle-o' size={50} color='black' />
+					<Text style={styles.username}>{username}</Text>
+				</View>
+				<DrawerContentScrollView {...props} style={{ marginTop: 50 }}>
 					<DrawerItemList {...props} />
 				</DrawerContentScrollView>
 			</SafeAreaView>
