@@ -14,7 +14,13 @@ const NavigationDrawerStructure = (props) => {
 					name='menu'
 					size={28}
 					color='black'
-					style={{ marginLeft: 20 }}
+					style={{
+						marginLeft:
+							props.routeName !== 'My Reviews Stack' &&
+							props.routeName !== 'My Reviews'
+								? 20
+								: 0,
+					}}
 				/>
 			</TouchableOpacity>
 		</View>

@@ -203,17 +203,20 @@ const SearchReview = (props) => {
 
 	return (
 		<>
-			<ScrollView
-				style={{ flex: 1 }}
-				contentContainerStyle={{ flexGrow: 1 }}
-				refreshControl={
-					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-				}
+			<ImageBackground
+				source={require('../../assets/search-page/search-bkg-image-white.png')}
+				resizeMode='cover'
+				style={styles.imageBackground}
 			>
-				<ImageBackground
-					source={require('../../assets/search-page/search-bkg-image-white.png')}
-					resizeMode='cover'
-					style={styles.imageBackground}
+				<ScrollView
+					style={{ flex: 1 }}
+					contentContainerStyle={{ flexGrow: 1 }}
+					refreshControl={
+						<RefreshControl
+							refreshing={refreshing}
+							onRefresh={onRefresh}
+						/>
+					}
 				>
 					<View style={styles.container}>
 						<View style={styles.searchInputView}>
@@ -251,8 +254,8 @@ const SearchReview = (props) => {
 								))}
 						</View>
 					</View>
-				</ImageBackground>
-			</ScrollView>
+				</ScrollView>
+			</ImageBackground>
 		</>
 	);
 };

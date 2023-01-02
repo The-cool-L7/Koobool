@@ -5,7 +5,7 @@ import AllBooks from './AllBooks';
 
 const Stack = createNativeStackNavigator();
 
-const AddReviewHome = (props) => {
+const AddReviewStack = (props) => {
 	return (
 		<>
 			<Stack.Navigator>
@@ -14,14 +14,10 @@ const AddReviewHome = (props) => {
 					component={AllBooks}
 					options={{ headerShown: false }}
 				/>
-				<Stack.Screen
-					name='Add Review Form'
-					component={AddReviewForm}
-					// options={{ headerShown: false }}
-				/>
+				<Stack.Screen name='Add Review Form' component={AddReviewForm} />
 			</Stack.Navigator>
 		</>
 	);
 };
 
-export default AddReviewHome;
+export default AddReviewStack;

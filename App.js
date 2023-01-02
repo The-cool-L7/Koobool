@@ -10,7 +10,7 @@ import {
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { Layout } from './components/utilities/utils';
-import MyReviews from './components/myReviews/MyReviews';
+import MyReviewsStack from './components/myReviews/MyReviewsStack';
 import HomeTab from './components/home/HomeTab';
 import CustomSidebarMenu from './components/sidebarMenu/CustomSidebarMenu';
 
@@ -56,10 +56,13 @@ export default function App() {
 							{(props) => <HomeTab {...props} routeName={routeName} />}
 						</Drawer.Screen>
 						<Drawer.Screen
-							name='My Reviews'
+							name='My Reviews Stack'
 							options={{ drawerLabel: 'My Reviews', headerShown: false }}
-							component={MyReviews}
-						/>
+						>
+							{(props) => (
+								<MyReviewsStack {...props} routeName={routeName} />
+							)}
+						</Drawer.Screen>
 					</Drawer.Navigator>
 				</NavigationContainer>
 			</Layout>

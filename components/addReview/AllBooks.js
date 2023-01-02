@@ -94,14 +94,14 @@ const AllBooks = (props) => {
 
 	return (
 		<>
-			<ScrollView
-				style={{ flex: 1 }}
-				contentContainerStyle={{ flexGrow: 1 }}
+			<ImageBackground
+				source={require('../../assets/review-page/review-bkg-image-white.png')}
+				resizeMode='cover'
+				style={styles.imageBackground}
 			>
-				<ImageBackground
-					source={require('../../assets/review-page/review-bkg-image-white.png')}
-					resizeMode='cover'
-					style={styles.imageBackground}
+				<ScrollView
+					style={{ flex: 1 }}
+					contentContainerStyle={{ flexGrow: 1 }}
 				>
 					<View style={styles.container}>
 						<View style={styles.searchInputView}>
@@ -139,8 +139,8 @@ const AllBooks = (props) => {
 								))}
 						</View>
 					</View>
-				</ImageBackground>
-			</ScrollView>
+				</ScrollView>
+			</ImageBackground>
 		</>
 	);
 };

@@ -3,6 +3,7 @@ import {
 	StyleSheet,
 	Text,
 	Image,
+	ImageBackground,
 	View,
 	ScrollView,
 	RefreshControl,
@@ -19,9 +20,28 @@ const styles = StyleSheet.create({
 		width: '100%',
 		paddingHorizontal: 10,
 	},
+	imageBackground: {
+		flex: 1,
+		flexDirection: 'column',
+	},
+	topTexts: {
+		paddingVertical: 20,
+	},
+	username: {
+		fontWeight: 'bold',
+		fontSize: 30,
+	},
+	reviewTextOne: {
+		fontWeight: 'bold',
+		fontSize: 22,
+		marginTop: 10,
+	},
+	reviewTextTwo: {
+		fontSize: 15,
+	},
 });
 
-const MyReviews = () => {
+const MyReviews = (props) => {
 	const [refreshing, setRefreshing] = useState(false);
 
 	const wait = (timeout) => {
@@ -38,13 +58,34 @@ const MyReviews = () => {
 
 	return (
 		<>
-			<ScrollView
-				style={{ flex: 1 }}
-				contentContainerStyle={{ flexGrow: 1 }}
-				refreshControl={
-					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-				}
-			></ScrollView>
+			<ImageBackground
+				source={require('../../assets/my-reviews/bkg-image.png')}
+				resizeMode='cover'
+				style={styles.imageBackground}
+			>
+				<ScrollView
+					style={{ flex: 1 }}
+					contentContainerStyle={{ flexGrow: 1 }}
+					refreshControl={
+						<RefreshControl
+							refreshing={refreshing}
+							onRefresh={onRefresh}
+						/>
+					}
+				>
+					<View style={styles.container}>
+						<View style={styles.topTexts}>
+							<Text style={styles.username}>Daniyal</Text>
+							<Text style={styles.reviewTextOne}>
+								Here are your reviews!
+							</Text>
+							<Text style={styles.reviewTextTwo}>
+								You have reviewed 5 books!
+							</Text>
+						</View>
+					</View>
+				</ScrollView>
+			</ImageBackground>
 		</>
 	);
 };

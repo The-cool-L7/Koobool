@@ -5,7 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import Home from './Home';
 import SearchReview from '../searchReview/SearchReview';
-import AddReviewHome from '../addReview/AddReviewHome';
+import AddReviewStack from '../addReview/AddReviewStack';
 import NavigationDrawerStructure from '../NavigationDrawerStructure/NavigationDrawerStructure';
 
 const HomeTab = (props) => {
@@ -21,7 +21,10 @@ const HomeTab = (props) => {
 					component={Home}
 					options={{
 						headerLeft: () => (
-							<NavigationDrawerStructure navigationProps={navigation} />
+							<NavigationDrawerStructure
+								navigationProps={navigation}
+								routeName={routeName}
+							/>
 						),
 						tabBarIcon: ({ focused }) => {
 							return (
@@ -55,7 +58,7 @@ const HomeTab = (props) => {
 				/>
 				<Tab.Screen
 					name='Add Review Home'
-					component={AddReviewHome}
+					component={AddReviewStack}
 					options={{
 						headerShown: routeName === 'Add Review Form' ? false : true,
 						headerLeft: () => (

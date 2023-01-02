@@ -114,17 +114,20 @@ const Home = () => {
 
 	return (
 		<>
-			<ScrollView
-				style={{ flex: 1 }}
-				contentContainerStyle={{ flexGrow: 1 }}
-				refreshControl={
-					<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-				}
+			<ImageBackground
+				source={require('../../assets/review-page/review-bkg-image-white.png')}
+				resizeMode='cover'
+				style={styles.imageBackground}
 			>
-				<ImageBackground
-					source={require('../../assets/review-page/review-bkg-image-white.png')}
-					resizeMode='cover'
-					style={styles.imageBackground}
+				<ScrollView
+					style={{ flex: 1 }}
+					contentContainerStyle={{ flexGrow: 1 }}
+					refreshControl={
+						<RefreshControl
+							refreshing={refreshing}
+							onRefresh={onRefresh}
+						/>
+					}
 				>
 					<View style={styles.container}>
 						<View style={styles.searchInputView}>
@@ -158,8 +161,8 @@ const Home = () => {
 								))}
 						</View>
 					</View>
-				</ImageBackground>
-			</ScrollView>
+				</ScrollView>
+			</ImageBackground>
 		</>
 	);
 };
