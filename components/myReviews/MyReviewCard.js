@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
 	left: {
 		justifyContent: 'space-between',
 		paddingVertical: 10,
-		paddingHorizontal: 20,
+		paddingHorizontal: 18,
 		paddingRight: 0,
 		alignItems: 'flex-start',
 	},
 	leftTop: {
-		maxWidth: 200,
+		maxWidth: 150,
 	},
 	leftBottom: {
 		alignItems: 'flex-start',

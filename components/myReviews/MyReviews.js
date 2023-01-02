@@ -7,10 +7,10 @@ import {
 	View,
 	ScrollView,
 	RefreshControl,
-	Alert,
 } from 'react-native';
 
 import MyReviewCard from './MyReviewCard';
+import { supabase } from '../../lib/supabase';
 
 const styles = StyleSheet.create({
 	scrollView: {
@@ -53,16 +53,54 @@ const MyReviews = (props) => {
 	const [refreshing, setRefreshing] = useState(false);
 	const [allBookReviews, setAllBookReviews] = useState([]);
 
-	const getReviewedByName = async (id) => {
+	const getUserReviewedIdByName = async (name) => {
 		try {
+			const { data, error } = await supabase
+				.from('Children')
+				.select('id')
+				.eq('name', name);
+
+			if (error) throw error;
+
+			return data[0].id;
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
+	const getBookAuthorNameById = async (bookId) => {
+		try {
+			const { data, error } = await supabase
+				.from('Books')
+				.select('book_author')
+				.eq('id', bookId);
+
+			if (error) throw error;
+
+			return data[0].book_author;
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const getBookNameAndImageById = async (id, returnData) => {
+		const { data, error } = await supabase
+			.from('Books')
+			.select('book_name, book_image, id')
+			.eq('id', id);
+
+		if (error) throw error;
+
+		if (returnData === 'BOOK_NAME') {
+			return data[0].book_name;
+		} else if (returnData === 'BOOK_IMAGE') {
+			return data[0].book_image;
+		}
+	};
+
 	const getAllReviews = async (reviewedById) => {
 		try {
-			let { data, error } = await supabase
+			const { data, error } = await supabase
 				.from('Reviews')
 				.select('*')
 				.eq('reviewed_by', reviewedById);
@@ -71,13 +109,13 @@ const MyReviews = (props) => {
 
 			for (const r of data) {
 				final.push({
-					username: await getChildNameById(r.reviewed_by),
 					bookName: await getBookNameAndImageById(r.book_id, 'BOOK_NAME'),
 					bookCoverSrc: await getBookNameAndImageById(
 						r.book_id,
 						'BOOK_IMAGE',
 					),
 					drawingSrc: r.review_image,
+					authorName: await getBookAuthorNameById(r.book_id),
 				});
 			}
 
@@ -101,10 +139,21 @@ const MyReviews = (props) => {
 		wait(1000).then(() => setRefreshing(false));
 	}, []);
 
+	useEffect(() => {
+		const getReviews = async () => {
+			getAllReviews(await getUserReviewedIdByName(username));
+		};
+
+		getReviews();
+	});
+
 	return (
 		<>
 			<ImageBackground
 				source={require('../../assets/my-reviews/bkg-image.png')}
+				// source={{
+				// 	uri: 'https://raw.githubusercontent.com/The-cool-L7/Koobool/4c989111af5311993ef10f2391074f3a961649fa/assets/my-reviews/bkg-image.png?token=GHSAT0AAAAAABM4YGVLOOEJOYNGZLXYSZUCY5S63GQ',
+				// }}
 				resizeMode='cover'
 				style={styles.imageBackground}
 			>
@@ -135,6 +184,16 @@ const MyReviews = (props) => {
 								bookCoverSrc='https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Chronicles%20of%20Narnia.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBDaHJvbmljbGVzIG9mIE5hcm5pYS5qcGciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA0MTg0MjUsImV4cCI6MTk4NTc3ODQyNX0.ca1-R8_lzup-7wN0jBjr1wNAQX8vYFbgrtHeMB-NhCs'
 								drawingSrc='https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-6f573ac1-1149-4fba-85e8-dec73a6bba31.jpg'
 							/>
+							{allBookReviews.length !== 0 &&
+								allBookReviews.map((r, index) => (
+									<MyReviewCard
+										key={index}
+										bookName={r.bookName}
+										authorName={r.authorName}
+										bookCoverSrc={r.bookCoverSrc}
+										drawingSrc={r.drawingSrc}
+									/>
+								))}
 						</View>
 					</View>
 				</ScrollView>
