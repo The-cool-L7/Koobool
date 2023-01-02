@@ -59,6 +59,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		width: '100%',
 	},
+	noReviewsText: {
+		fontWeight: 'bold',
+		fontSize: 20,
+		textAlign: 'center',
+	},
 });
 
 const SearchReview = (props) => {
@@ -252,6 +257,12 @@ const SearchReview = (props) => {
 										key={index}
 									/>
 								))}
+
+							{filteredBookReviews.length === 0 && (
+								<Text style={styles.noReviewsText}>
+									No Reviews to show!
+								</Text>
+							)}
 						</View>
 					</View>
 				</ScrollView>
