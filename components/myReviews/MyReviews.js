@@ -57,6 +57,7 @@ const MyReviews = (props) => {
 
 	const [refreshing, setRefreshing] = useState(false);
 	const [allBookReviews, setAllBookReviews] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const getUserReviewedIdByName = async (name) => {
 		try {
@@ -127,6 +128,7 @@ const MyReviews = (props) => {
 			if (error) throw error;
 
 			setAllBookReviews(final);
+			setLoading(false);
 		} catch (err) {
 			console.log(err);
 		}
@@ -136,10 +138,10 @@ const MyReviews = (props) => {
 		return new Promise((resolve) => setTimeout(resolve, timeout));
 	};
 
-	const onRefresh = useCallback(() => {
+	const onRefresh = useCallback(async () => {
 		setRefreshing(true);
 
-		console.log('my reviews page refreshing');
+		getAllReviews(await getUserReviewedIdByName(username));
 
 		wait(1000).then(() => setRefreshing(false));
 	}, []);
@@ -190,6 +192,7 @@ const MyReviews = (props) => {
 										drawingSrc={r.drawingSrc}
 									/>
 								))}
+
 							{allBookReviews.length === 0 && (
 								<Text style={styles.noReviewsText}>
 									You haven't added any reviews yet!
