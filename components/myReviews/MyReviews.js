@@ -9,6 +9,8 @@ import {
 	RefreshControl,
 } from 'react-native';
 
+import MyReviewCard from './MyReviewCard';
+
 const styles = StyleSheet.create({
 	scrollView: {
 		flex: 1,
@@ -38,6 +40,9 @@ const styles = StyleSheet.create({
 	},
 	reviewTextTwo: {
 		fontSize: 15,
+	},
+	myReviews: {
+		marginTop: 10,
 	},
 });
 
@@ -82,6 +87,14 @@ const MyReviews = (props) => {
 							<Text style={styles.reviewTextTwo}>
 								You have reviewed 5 books!
 							</Text>
+						</View>
+						<View style={styles.myReviews}>
+							<MyReviewCard
+								bookName='The Awesome Egyptian'
+								authorName='Terry Deary'
+								bookCoverSrc='https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Chronicles%20of%20Narnia.jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBDaHJvbmljbGVzIG9mIE5hcm5pYS5qcGciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA0MTg0MjUsImV4cCI6MTk4NTc3ODQyNX0.ca1-R8_lzup-7wN0jBjr1wNAQX8vYFbgrtHeMB-NhCs'
+								drawingSrc='https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/public/reviewimages/review-6f573ac1-1149-4fba-85e8-dec73a6bba31.jpg'
+							/>
 						</View>
 					</View>
 				</ScrollView>

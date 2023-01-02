@@ -4,9 +4,10 @@ const styles = StyleSheet.create({
 	container: {
 		// padding: 25,
 		borderWidth: 4,
-		backgroundColor: '#f1f1f1',
+		backgroundColor: '#fff',
 		width: '100%',
-		borderRadius: 25,
+		// maxWidth: '100%',
+		// borderRadius: 25,
 		marginTop: 20,
 
 		flexDirection: 'row',
@@ -14,22 +15,63 @@ const styles = StyleSheet.create({
 	},
 	left: {
 		justifyContent: 'space-between',
+		paddingVertical: 10,
+		paddingHorizontal: 20,
+		paddingRight: 0,
+		alignItems: 'flex-start',
 	},
-	right: {},
-	bookImage: {},
-	drawingImage: {},
+	leftTop: {
+		maxWidth: 200,
+	},
+	leftBottom: {
+		alignItems: 'flex-start',
+	},
+	bookName: {
+		fontSize: 18,
+		fontWeight: 'bold',
+	},
+	author: {
+		fontSize: 18,
+		marginTop: 5,
+	},
+	right: {
+		borderLeftColor: '#000',
+		borderLeftWidth: '4',
+	},
+	bookImage: {
+		width: 130,
+		height: 230,
+	},
+	drawingImage: {
+		marginTop: 10,
+		width: 160,
+		height: 125,
+	},
 });
 
 const MyReviewCard = (props) => {
 	const { bookCoverSrc, drawingSrc, bookName, authorName } = props;
 
-	// https://klaqoarttawlrpftzomo.supabase.co/storage/v1/object/sign/bookimages/The%20Awesome%20Egyptians%20(Horrible%20Histories).jpg?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJib29raW1hZ2VzL1RoZSBBd2Vzb21lIEVneXB0aWFucyAoSG9ycmlibGUgSGlzdG9yaWVzKS5qcGciLCJ0cmFuc2Zvcm1hdGlvbnMiOiIiLCJpYXQiOjE2NzA0MTczNzUsImV4cCI6MTk4NTc3NzM3NX0.9YB-BRgme0nD_Ng1i8nvUgHy4zNkEd-yrJqIvoE_cDU
+	//
 	return (
 		<>
 			<View style={styles.container}>
-				<View></View>
-				<View style={styles.left}></View>
-				<View style={styles.right}></View>
+				<View style={styles.left}>
+					<View style={styles.leftTop}>
+						<Text style={styles.bookName}>{bookName}</Text>
+						<Text style={styles.author}>{authorName}</Text>
+					</View>
+					<View style={styles.leftBottom}>
+						<Image
+							resizeMode='cover'
+							style={styles.drawingImage}
+							source={{ uri: drawingSrc }}
+						/>
+					</View>
+				</View>
+				<View style={styles.right}>
+					<Image style={styles.bookImage} source={{ uri: bookCoverSrc }} />
+				</View>
 			</View>
 		</>
 	);
