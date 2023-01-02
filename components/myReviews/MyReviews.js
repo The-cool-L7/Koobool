@@ -7,6 +7,7 @@ import {
 	View,
 	ScrollView,
 	RefreshControl,
+	Alert,
 } from 'react-native';
 
 import MyReviewCard from './MyReviewCard';
@@ -47,7 +48,46 @@ const styles = StyleSheet.create({
 });
 
 const MyReviews = (props) => {
+	const { username } = props;
+
 	const [refreshing, setRefreshing] = useState(false);
+	const [allBookReviews, setAllBookReviews] = useState([]);
+
+	const getReviewedByName = async (id) => {
+		try {
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const getAllReviews = async (reviewedById) => {
+		try {
+			let { data, error } = await supabase
+				.from('Reviews')
+				.select('*')
+				.eq('reviewed_by', reviewedById);
+
+			const final = [];
+
+			for (const r of data) {
+				final.push({
+					username: await getChildNameById(r.reviewed_by),
+					bookName: await getBookNameAndImageById(r.book_id, 'BOOK_NAME'),
+					bookCoverSrc: await getBookNameAndImageById(
+						r.book_id,
+						'BOOK_IMAGE',
+					),
+					drawingSrc: r.review_image,
+				});
+			}
+
+			if (error) throw error;
+
+			setAllBookReviews(final);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	const wait = (timeout) => {
 		return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -80,7 +120,7 @@ const MyReviews = (props) => {
 				>
 					<View style={styles.container}>
 						<View style={styles.topTexts}>
-							<Text style={styles.username}>Daniyal</Text>
+							<Text style={styles.username}>{username}</Text>
 							<Text style={styles.reviewTextOne}>
 								Here are your reviews!
 							</Text>

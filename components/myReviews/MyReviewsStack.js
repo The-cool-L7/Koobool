@@ -13,7 +13,6 @@ const MyReviewsStack = (props) => {
 			<Stack.Navigator>
 				<Stack.Screen
 					name='My Reviews'
-					component={MyReviews}
 					options={{
 						headerLeft: () => (
 							<NavigationDrawerStructure
@@ -22,7 +21,9 @@ const MyReviewsStack = (props) => {
 							/>
 						),
 					}}
-				/>
+				>
+					{(props) => <MyReviews {...props} username={'Daniyal'} />}
+				</Stack.Screen>
 			</Stack.Navigator>
 		</>
 	);
