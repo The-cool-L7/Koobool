@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexGrow: 1,
 		paddingBottom: 10,
-		width: '100%',
 		paddingHorizontal: 10,
 	},
 	imageBackground: {
@@ -57,7 +56,6 @@ const MyReviews = (props) => {
 
 	const [refreshing, setRefreshing] = useState(false);
 	const [allBookReviews, setAllBookReviews] = useState([]);
-	const [loading, setLoading] = useState(true);
 
 	const getUserReviewedIdByName = async (name) => {
 		try {
@@ -128,7 +126,6 @@ const MyReviews = (props) => {
 			if (error) throw error;
 
 			setAllBookReviews(final);
-			setLoading(false);
 		} catch (err) {
 			console.log(err);
 		}
