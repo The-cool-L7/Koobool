@@ -130,7 +130,6 @@ const SearchReview = (props) => {
 	};
 
 	const onSearchInputChange = async (text) => {
-		console.log(text);
 		try {
 			if (text.length !== 0) {
 				console.log('hello');
@@ -237,7 +236,7 @@ const SearchReview = (props) => {
 						<Text style={styles.recentReviewsText}>Recent reviews</Text>
 						<View style={styles.reviewCards}>
 							{filteredBookReviews.length === 0 &&
-							allBookReviews.length > 0 ? (
+								allBookReviews.length > 0 &&
 								allBookReviews.map((r, index) => (
 									<ReviewCard
 										username={r.username}
@@ -246,10 +245,7 @@ const SearchReview = (props) => {
 										drawingSrc={r.drawingSrc}
 										key={index}
 									/>
-								))
-							) : (
-								<Image source={require('../../assets/loading.gif')} />
-							)}
+								))}
 
 							{filteredBookReviews.length !== 0 &&
 								filteredBookReviews.map((r, index) => (
