@@ -8,6 +8,7 @@
 4. Run: `npm install`
 5. After the installation is complete, run: `npx expo start --tunnel` or `npx expo start --tunnel -c` (no cache)
 6. This will give you a QR code. Follow the instructions on the terminal to use the app.
+7. Read [this](#qr-codes-for-the-test-version-of-the-app) to learn how to scan the QR codes and open the Koobool MVP app (IOS and Android).
 
 ## QR codes for the test version of the app
 
